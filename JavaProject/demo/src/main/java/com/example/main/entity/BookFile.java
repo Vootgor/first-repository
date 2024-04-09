@@ -1,15 +1,26 @@
 package com.example.main.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "book_files")
 public class BookFile {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     int id;
 
-    String name_file;
+    @Column(name = "file_name")
+    String fileName;
 
-    long size_file;
+    @Column(name = "file_size")
+    long fileSize;
 
+    @Column(name = "file_type")
     String fileType;
 
-    byte [] filData;
+    @Column(name = "file_data")
+    byte [] fileData;
 
 }

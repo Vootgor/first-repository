@@ -5,40 +5,47 @@ import com.example.main.entity.BookFile;
 import com.example.main.entity.enam.EvaluationOfBook;
 import com.example.main.entity.enam.Genre;
 import com.example.main.entity.enam.ReadingStatus;
-import org.springframework.jdbc.core.RowMapper;
+import jakarta.persistence.*;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+@Entity
 public abstract class Literature {
 
-    NamedParameterJdbcTemplate jdbcTemplate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-    int id;
+    @Column(name = "title_of_book")
+    private String titleOfBook;
 
-    String titleOfBook;
+    @Column(name = "genre")
+    private Genre genre;
 
-    Genre genre;
+    @Column(name = "quantity_of_page")
+    private int quantityOfPage;
 
-    int quantityOfPage;
+    @Column(name = "reading_status")
+    private ReadingStatus readingStatus;
 
-    ReadingStatus readingStatus;
+    @Column(name = "evaluation_of_book")
+    private EvaluationOfBook evaluationOfBook;
 
-    EvaluationOfBook evaluationOfBook;
+    @Column(name = "comment_of_book")
+    private String commentOfBook;
 
-    String commentOfBook;
+    @Column(name = "book_add_date")
+    private LocalDateTime bookAddedDate;
 
-    LocalDateTime bookAddedDate;
+    @Column(name = "book_was_read_date")
+    private LocalDateTime bookWasReadDate;
 
-    LocalDateTime bookWasReadDate;
+    private BookFile bookFile;
 
-    Map<Integer, BookFile> fileMetadata;
-
-    Map<Integer, Author> authorMetadata;
-
+    private Author author;
 
 }
