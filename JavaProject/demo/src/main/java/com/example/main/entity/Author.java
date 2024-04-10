@@ -30,7 +30,7 @@ public class Author {
             joinColumns = @JoinColumn(name = "author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
-    Set<Book> books;
+    private Set<Book> books;//связь с табл books_authors
 
 
     public Author() {
