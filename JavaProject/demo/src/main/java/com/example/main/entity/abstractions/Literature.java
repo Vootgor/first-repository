@@ -1,16 +1,14 @@
 package com.example.main.entity.abstractions;
 
-import com.example.main.entity.Author;
-import com.example.main.entity.BookFile;
+
 import com.example.main.entity.enam.EvaluationOfBook;
 import com.example.main.entity.enam.Genre;
 import com.example.main.entity.enam.ReadingStatus;
 import jakarta.persistence.*;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
 
 import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.Set;
+
 
 @Entity
 public abstract class Literature {

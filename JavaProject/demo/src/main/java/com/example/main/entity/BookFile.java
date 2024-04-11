@@ -1,6 +1,6 @@
 package com.example.main.entity;
 
-import com.example.main.entity.abstractions.Literature;
+
 import jakarta.persistence.*;
 
 @Entity
