@@ -10,6 +10,6 @@ public interface ServiceAuthor {
     public List<Author> getAllAuthors();
     public Author getAuthor(int id);
     public void saveOrUpdateAuthor (Author author);
-
     public void deleteAuthor(int id);
+
 }

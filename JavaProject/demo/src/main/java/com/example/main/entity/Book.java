@@ -4,6 +4,7 @@ import com.example.main.entity.abstractions.Literature;
 import com.example.main.entity.enam.EvaluationOfBook;
 import com.example.main.entity.enam.Genre;
 import com.example.main.entity.enam.ReadingStatus;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,8 @@ import java.util.Set;
 @Table(name = "books")
 public final class Book extends Literature {
 
-    //говорит о том что связь уже налажена классе Author поле books
+//    говорит о том что связь уже налажена классе Author поле books
+    @JsonIgnoreProperties(value = "books")
     @ManyToMany(mappedBy = "books", cascade = {CascadeType.PERSIST
             ,CascadeType.MERGE, CascadeType.REFRESH , CascadeType.DETACH})
     private Set<Author> authors;
@@ -29,7 +31,7 @@ public final class Book extends Literature {
                 LocalDateTime bookWasReadDate, Set<Author> authors, Set<BookFile> bookFiles) {
         super(titleOfBook, genre, quantityOfPage, readingStatus, evaluationOfBook, commentOfBook,
                 bookAddedDate, bookWasReadDate);
-        this.authors = authors;
+//        this.authors = authors;
         this.bookFiles = bookFiles;
     }
 

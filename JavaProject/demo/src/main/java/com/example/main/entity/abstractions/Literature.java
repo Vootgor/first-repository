@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 
-@Entity
+@MappedSuperclass
 public abstract class Literature {
 
     @Id

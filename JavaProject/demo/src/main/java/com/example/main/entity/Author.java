@@ -1,5 +1,7 @@
 package com.example.main.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -22,6 +24,7 @@ public class Author {
     @Column(name = "author_patronymic")
     String AuthorPatronymic;
 
+    @JsonIgnoreProperties(value = "authors")
     @ManyToMany(cascade = {CascadeType.PERSIST
             ,CascadeType.MERGE, CascadeType.REFRESH , CascadeType.DETACH}
             , fetch = FetchType.EAGER)
