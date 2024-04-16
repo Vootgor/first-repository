@@ -3,9 +3,11 @@ package com.example.main.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Arrays;
+
 @Entity
 @Table(name = "book_files")
-public class BookFile {
+public final class BookFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,5 +88,16 @@ public class BookFile {
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    @Override
+    public String toString() {
+        return "BookFile{" +
+                "id=" + id +
+                ", fileName='" + fileName + '\'' +
+                ", fileSize=" + fileSize +
+                ", fileType='" + fileType + '\'' +
+                ", fileData=" + Arrays.toString(fileData) +
+                '}';
     }
 }
