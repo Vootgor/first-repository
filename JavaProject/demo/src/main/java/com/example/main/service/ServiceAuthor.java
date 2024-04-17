@@ -12,4 +12,6 @@ public interface ServiceAuthor {
     public void saveOrUpdateAuthor (Author author);
     public void deleteAuthor(int id);
 
+    public Author findByAuthorNameAndAuthorLastName(String authorName, String authorLastName);
+
 }

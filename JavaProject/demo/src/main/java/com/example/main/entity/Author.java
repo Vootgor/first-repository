@@ -16,13 +16,13 @@ public final class Author {
     int id;
 
     @Column(name = "author_name")
-    String AuthorName;
+    String authorName;
 
     @Column(name = "author_last_name")
-    String AuthorLastName;
+    String authorLastName;
 
     @Column(name = "author_patronymic")
-    String AuthorPatronymic;
+    String authorPatronymic;
 
     @JsonIgnoreProperties(value = "authors")
     @ManyToMany(cascade = {CascadeType.PERSIST
@@ -40,9 +40,9 @@ public final class Author {
     }
 
     public Author(String authorName, String authorLastName, String authorPatronymic) {
-        AuthorName = authorName;
-        AuthorLastName = authorLastName;
-        AuthorPatronymic = authorPatronymic;
+        this.authorName = authorName;
+        this.authorLastName = authorLastName;
+        this.authorPatronymic = authorPatronymic;
     }
 
     public int getId() {
@@ -54,27 +54,27 @@ public final class Author {
     }
 
     public String getAuthorName() {
-        return AuthorName;
+        return authorName;
     }
 
     public void setAuthorName(String authorName) {
-        AuthorName = authorName;
+        this.authorName = authorName;
     }
 
     public String getAuthorLastName() {
-        return AuthorLastName;
+        return authorLastName;
     }
 
     public void setAuthorLastName(String authorLastName) {
-        AuthorLastName = authorLastName;
+        this.authorLastName = authorLastName;
     }
 
     public String getAuthorPatronymic() {
-        return AuthorPatronymic;
+        return authorPatronymic;
     }
 
     public void setAuthorPatronymic(String authorPatronymic) {
-        AuthorPatronymic = authorPatronymic;
+        this.authorPatronymic = authorPatronymic;
     }
 
     public Set<Book> getBooks() {
@@ -89,9 +89,9 @@ public final class Author {
     public String toString() {
         return "Author{" +
                 "id=" + id +
-                ", AuthorName='" + AuthorName + '\'' +
-                ", AuthorLastName='" + AuthorLastName + '\'' +
-                ", AuthorPatronymic='" + AuthorPatronymic + '\'' +
+                ", AuthorName='" + authorName + '\'' +
+                ", AuthorLastName='" + authorLastName + '\'' +
+                ", AuthorPatronymic='" + authorPatronymic + '\'' +
                 '}';
     }
 }

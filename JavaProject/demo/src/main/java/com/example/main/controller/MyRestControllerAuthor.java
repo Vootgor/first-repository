@@ -23,6 +23,16 @@ public class MyRestControllerAuthor {
         return serviceAuthor.getAuthor(id);
     }
 
+
+
+    @GetMapping("/authors/byfullname")
+    public Author showAuthorByFullName(@RequestParam String authorName, @RequestParam String authorLastName){
+        return serviceAuthor.findByAuthorNameAndAuthorLastName(authorName,authorLastName);
+    }
+
+
+
+
     @PostMapping("/authors")
     public Author saveAuthor(@RequestBody Author author){
         serviceAuthor.saveOrUpdateAuthor(author);

@@ -45,4 +45,9 @@ public class ServiceAuthorImpl implements ServiceAuthor{
         repositoryAuthor.deleteById(id);
     }
 
+    @Override
+    public Author findByAuthorNameAndAuthorLastName(String authorName, String authorLastName) {
+        return repositoryAuthor.findByAuthorNameAndAuthorLastName(authorName, authorLastName);
+    }
+
 }
