@@ -46,8 +46,18 @@ public class ServiceAuthorImpl implements ServiceAuthor{
     }
 
     @Override
-    public Author findByAuthorNameAndAuthorLastName(String authorName, String authorLastName) {
+    public List<Author> findByAuthorLastName(String authorLastName) {
+        return repositoryAuthor.findByAuthorLastName(authorLastName);
+    }
+
+    @Override
+    public List<Author> findByAuthorNameAndAuthorLastName(String authorName, String authorLastName) {
         return repositoryAuthor.findByAuthorNameAndAuthorLastName(authorName, authorLastName);
+    }
+
+    @Override
+    public List<Author> findByAuthorFullName(String authorName, String authorLastName, String authorPatronymic) {
+        return repositoryAuthor.findByAuthorNameAndAuthorLastNameAndAuthorPatronymic(authorName, authorLastName,authorPatronymic);
     }
 
 }

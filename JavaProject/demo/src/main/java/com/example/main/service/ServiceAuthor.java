@@ -7,11 +7,20 @@ import java.util.Set;
 
 public interface ServiceAuthor {
 
+
+//--------------------------------------------------------------------------
+// Standard CRUD method
     public List<Author> getAllAuthors();
     public Author getAuthor(int id);
     public void saveOrUpdateAuthor (Author author);
     public void deleteAuthor(int id);
 
-    public Author findByAuthorNameAndAuthorLastName(String authorName, String authorLastName);
+
+
+//----------------------------------------------------------------------------
+// Creating method
+    public List<Author> findByAuthorLastName(String authorLastName);
+    public List<Author> findByAuthorNameAndAuthorLastName(String authorName, String authorLastName);
+    public List<Author> findByAuthorFullName(String authorName, String authorLastName,String authorPatronymic);
 
 }

@@ -25,9 +25,14 @@ public class MyRestControllerAuthor {
 
 
 
-    @GetMapping("/authors/byfullname")
-    public Author showAuthorByFullName(@RequestParam String authorName, @RequestParam String authorLastName){
-        return serviceAuthor.findByAuthorNameAndAuthorLastName(authorName,authorLastName);
+    @GetMapping("/authors/findByAuthor")
+    public List<Author> showAuthorByFullName(@RequestParam (required = false) String authorName, @RequestParam() String authorLastName
+    , @RequestParam(required = false) String authorPatronymic){
+        if (authorName == null && authorPatronymic == null){
+            return serviceAuthor.findByAuthorLastName(authorLastName);
+        }else if (authorPatronymic == null){
+            return serviceAuthor.findByAuthorNameAndAuthorLastName(authorName,authorLastName);
+        }return serviceAuthor.findByAuthorFullName(authorName,authorLastName,authorPatronymic);
     }
 
 
