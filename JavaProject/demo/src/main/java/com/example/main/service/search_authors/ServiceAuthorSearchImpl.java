@@ -1,7 +1,8 @@
-package com.example.main.service;
+package com.example.main.service.search_authors;
 
 import com.example.main.dao.RepositoryAuthor;
 import com.example.main.entity.Author;
+import com.example.main.service.ServiceAuthor;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 
 @Service
-public class ServiceAuthorImpl implements ServiceAuthor{
+public class ServiceAuthorSearchImpl implements ServiceAuthor {
 
     @Autowired
     private RepositoryAuthor repositoryAuthor;
@@ -45,17 +46,22 @@ public class ServiceAuthorImpl implements ServiceAuthor{
         repositoryAuthor.deleteById(id);
     }
 
+
+
     @Override
+    @Transactional
     public List<Author> findByAuthorLastName(String authorLastName) {
         return repositoryAuthor.findByAuthorLastName(authorLastName);
     }
 
     @Override
+    @Transactional
     public List<Author> findByAuthorNameAndAuthorLastName(String authorName, String authorLastName) {
         return repositoryAuthor.findByAuthorNameAndAuthorLastName(authorName, authorLastName);
     }
 
     @Override
+    @Transactional
     public List<Author> findByAuthorFullName(String authorName, String authorLastName, String authorPatronymic) {
         return repositoryAuthor.findByAuthorNameAndAuthorLastNameAndAuthorPatronymic(authorName, authorLastName,authorPatronymic);
     }
