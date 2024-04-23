@@ -21,15 +21,18 @@ public abstract class Literature {
     @Column(name = "title_of_book")
     private String titleOfBook;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "genre")
     private Genre genre;
 
     @Column(name = "quantity_of_page")
     private int quantityOfPage;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "reading_status")
     private ReadingStatus readingStatus;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "evaluation_of_book")
     private EvaluationOfBook evaluationOfBook;
 
@@ -128,5 +131,20 @@ public abstract class Literature {
 
     public void setBookWasReadDate(LocalDateTime bookWasReadDate) {
         this.bookWasReadDate = bookWasReadDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Literature{" +
+                "id=" + id +
+                ", titleOfBook='" + titleOfBook + '\'' +
+                ", genre=" + genre +
+                ", quantityOfPage=" + quantityOfPage +
+                ", readingStatus=" + readingStatus +
+                ", evaluationOfBook=" + evaluationOfBook +
+                ", commentOfBook='" + commentOfBook + '\'' +
+                ", bookAddedDate=" + bookAddedDate +
+                ", bookWasReadDate=" + bookWasReadDate +
+                '}';
     }
 }

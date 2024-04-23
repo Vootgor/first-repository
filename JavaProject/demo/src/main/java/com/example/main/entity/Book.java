@@ -31,7 +31,7 @@ public final class Book extends Literature {
                 LocalDateTime bookWasReadDate, Set<Author> authors, Set<BookFile> bookFiles) {
         super(titleOfBook, genre, quantityOfPage, readingStatus, evaluationOfBook, commentOfBook,
                 bookAddedDate, bookWasReadDate);
-//        this.authors = authors;
+        this.authors = authors;
         this.bookFiles = bookFiles;
     }
 
