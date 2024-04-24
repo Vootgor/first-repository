@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @MappedSuperclass
@@ -40,7 +41,7 @@ public abstract class Literature {
     private String commentOfBook;
 
     @Column(name = "book_add_date")
-    private LocalDateTime bookAddedDate;
+    private LocalDateTime bookAddedDate = LocalDateTime.now();
 
     @Column(name = "book_was_read_date")
     private LocalDateTime bookWasReadDate;
@@ -146,5 +147,17 @@ public abstract class Literature {
                 ", bookAddedDate=" + bookAddedDate +
                 ", bookWasReadDate=" + bookWasReadDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Literature that)) return false;
+        return id == that.id && quantityOfPage == that.quantityOfPage && Objects.equals(titleOfBook, that.titleOfBook) && genre == that.genre && readingStatus == that.readingStatus && evaluationOfBook == that.evaluationOfBook && Objects.equals(commentOfBook, that.commentOfBook) && Objects.equals(bookAddedDate, that.bookAddedDate) && Objects.equals(bookWasReadDate, that.bookWasReadDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, titleOfBook, genre, quantityOfPage, readingStatus, evaluationOfBook, commentOfBook, bookAddedDate, bookWasReadDate);
     }
 }
