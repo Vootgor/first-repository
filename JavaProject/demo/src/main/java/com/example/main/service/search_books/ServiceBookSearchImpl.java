@@ -2,6 +2,9 @@ package com.example.main.service.search_books;
 
 import com.example.main.dao.RepositoryBook;
 import com.example.main.entity.Book;
+import com.example.main.entity.enam.EvaluationOfBook;
+import com.example.main.entity.enam.Genre;
+import com.example.main.entity.enam.ReadingStatus;
 import com.example.main.service.ServiceBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,11 +45,29 @@ public class ServiceBookSearchImpl implements ServiceBook {
     }
 
     @Override
+    public void deleteAllBooks() {
+        repositoryBook.deleteAll();
+    }
+
+    @Override
     public List<Book> findByTitleOfBook(String titleOfBook) {
         return repositoryBook.findByTitleOfBook(titleOfBook);
     }
 
+    @Override
+    public List<Book> findByGenre(Genre genre) {
+        return repositoryBook.findByGenre(genre);
+    }
 
+    @Override
+    public List<Book> findByReadingStatus(ReadingStatus readingStatus) {
+        return repositoryBook.findByReadingStatus(readingStatus);
+    }
+
+    @Override
+    public List<Book> findByEvaluationOfBook(EvaluationOfBook evaluationOfBook) {
+        return repositoryBook.findByEvaluationOfBook(evaluationOfBook);
+    }
 
 
 }
