@@ -1,19 +1,17 @@
 package com.example.main.controller;
 
-import com.example.main.entity.Author;
 import com.example.main.entity.Book;
 import com.example.main.entity.enam.EvaluationOfBook;
 import com.example.main.entity.enam.Genre;
 import com.example.main.entity.enam.ReadingStatus;
 import com.example.main.service.ServiceBook;
-import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class MyRestControllerBook {
+public class ControllerBookFind {
 
     @Autowired
     private ServiceBook serviceBook;

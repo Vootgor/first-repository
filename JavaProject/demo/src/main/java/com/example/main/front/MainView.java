@@ -1,9 +1,8 @@
 package com.example.main.front;
 
-import com.example.main.controller.MyRestControllerBook;
+import com.example.main.controller.ControllerBookFind;
 import com.example.main.entity.Book;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -13,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route("api/books")
 public class MainView extends VerticalLayout {
 
-    private final MyRestControllerBook restControllerBook;
+    private final ControllerBookFind restControllerBook;
     private final Grid<Book> grid = new Grid<>(Book.class);
 
     @Autowired
-    public MainView(MyRestControllerBook restControllerBook) {
+    public MainView(ControllerBookFind restControllerBook) {
         this.restControllerBook = restControllerBook;
 
         Button showAllButton = new Button("Показать все книги");

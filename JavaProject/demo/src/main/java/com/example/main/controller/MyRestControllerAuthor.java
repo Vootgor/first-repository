@@ -36,10 +36,17 @@ public class MyRestControllerAuthor {
     }
 
 
-
-
     @PostMapping("/authors")
     public Author saveAuthor(@RequestBody Author author){
+        List <Author> otherAuthors = showAuthorByFullName(author.getAuthorName()
+                ,author.getAuthorLastName(),author.getAuthorPatronymic());
+        if (!otherAuthors.isEmpty()){
+            System.out.println("Данный автор уже существует");
+            for (Author author1 : otherAuthors){
+                System.out.println(author1);
+            }
+            return author;
+        }
         serviceAuthor.saveOrUpdateAuthor(author);
         return author;
     }
