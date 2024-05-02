@@ -6,11 +6,14 @@ import com.example.main.entity.Book;
 import com.example.main.service.ServiceAuthor;
 import com.example.main.service.ServiceBook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Repository
+import java.time.LocalDateTime;
+import java.util.Set;
+
+@RestController
 public class ControllerAuthorsWithBooksMethods {
 
     @Autowired
@@ -19,15 +22,18 @@ public class ControllerAuthorsWithBooksMethods {
     private ServiceAuthor serviceAuthor;
 
 
+
     @PostMapping("/library/booksAndAuthors/add")
-    public DtoAuthorsWithBooks saveBook(@RequestBody DtoAuthorsWithBooks dtoAuthorsWithBooks){
+    public DtoAuthorsWithBooks saveBookAndAuthor(@RequestBody DtoAuthorsWithBooks bookAuthorDTO) {
 
-        Author author = dtoAuthorsWithBooks.getAuthor();
-        Book book = dtoAuthorsWithBooks.getBook();
-
+        Author author = new Author(bookAuthorDTO.getAuthorName(), bookAuthorDTO.getAuthorLastName(), bookAuthorDTO.getAuthorPatronymic());
         serviceAuthor.saveOrUpdateAuthor(author);
+
+        Book book = new Book(bookAuthorDTO.getTitleOfBook(), bookAuthorDTO.getGenre(), bookAuthorDTO.getQuantityOfPage(),
+                bookAuthorDTO.getReadingStatus(), bookAuthorDTO.getEvaluationOfBook(), bookAuthorDTO.getCommentOfBook(),
+                LocalDateTime.now(), null, Set.of(author), null);
         serviceBook.saveOrUpdateBook(book);
-        return dtoAuthorsWithBooks;
+        return bookAuthorDTO;
     }
 
 

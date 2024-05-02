@@ -31,7 +31,7 @@ public abstract class Literature {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "reading_status")
-    private ReadingStatus readingStatus;
+    private ReadingStatus readingStatus= ReadingStatus.UNKNOWN;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "evaluation_of_book")

@@ -14,35 +14,35 @@ public class MyRestControllerAuthor {
     public ServiceAuthor serviceAuthor;
 
     @GetMapping("/authors")
-    public List<Author> showAllAuthors(){
+    public List<Author> showAllAuthors() {
         return serviceAuthor.getAllAuthors();
     }
 
     @GetMapping("/authors/{id}")
-    public Author showAuthor(@PathVariable int id){
+    public Author showAuthor(@PathVariable int id) {
         return serviceAuthor.getAuthor(id);
     }
 
 
-
     @GetMapping("/authors/findByAuthor")
-    public List<Author> showAuthorByFullName(@RequestParam (required = false) String authorName, @RequestParam() String authorLastName
-    , @RequestParam(required = false) String authorPatronymic){
-        if (authorName == null && authorPatronymic == null){
+    public List<Author> showAuthorByFullName(@RequestParam(required = false) String authorName, @RequestParam() String authorLastName
+            , @RequestParam(required = false) String authorPatronymic) {
+        if (authorName == null && authorPatronymic == null) {
             return serviceAuthor.findByAuthorLastName(authorLastName);
-        }else if (authorPatronymic == null){
-            return serviceAuthor.findByAuthorNameAndAuthorLastName(authorName,authorLastName);
-        }return serviceAuthor.findByAuthorFullName(authorName,authorLastName,authorPatronymic);
+        } else if (authorPatronymic == null) {
+            return serviceAuthor.findByAuthorNameAndAuthorLastName(authorName, authorLastName);
+        }
+        return serviceAuthor.findByAuthorFullName(authorName, authorLastName, authorPatronymic);
     }
 
 
     @PostMapping("/authors")
-    public Author saveAuthor(@RequestBody Author author){
-        List <Author> otherAuthors = showAuthorByFullName(author.getAuthorName()
-                ,author.getAuthorLastName(),author.getAuthorPatronymic());
-        if (!otherAuthors.isEmpty()){
+    public Author saveAuthor(@RequestBody Author author) {
+        List<Author> otherAuthors = showAuthorByFullName(author.getAuthorName()
+                , author.getAuthorLastName(), author.getAuthorPatronymic());
+        if (!otherAuthors.isEmpty()) {
             System.out.println("Данный автор уже существует");
-            for (Author author1 : otherAuthors){
+            for (Author author1 : otherAuthors) {
                 System.out.println(author1);
             }
             return author;
@@ -52,16 +52,16 @@ public class MyRestControllerAuthor {
     }
 
     @PutMapping("/authors")
-    public Author updateAuthor(@RequestBody Author author){
-         serviceAuthor.saveOrUpdateAuthor(author);
-         return author;
+    public Author updateAuthor(@RequestBody Author author) {
+        serviceAuthor.saveOrUpdateAuthor(author);
+        return author;
     }
 
     @DeleteMapping("/authors/{id}")
-    public String deleteAuthor(@PathVariable int id){
+    public String deleteAuthor(@PathVariable int id) {
         Author author = serviceAuthor.getAuthor(id);
         serviceAuthor.deleteAuthor(id);
-        return "Was deleted author "+ author +" with id " + id;
+        return "Was deleted author " + author + " with id " + id;
     }
 
 }

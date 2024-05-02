@@ -1,7 +1,9 @@
 package com.example.main.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -35,14 +37,20 @@ public final class Author {
     )
     private Set<Book> books;//связь с табл books_authors
 
-
     public Author() {
     }
-
+    @JsonCreator
     public Author(String authorName, String authorLastName, String authorPatronymic) {
+        if (authorName == null){
+            throw new IllegalArgumentException("Имя автора не может быть null");
+        }
+        if (authorLastName == null){
+            throw new IllegalArgumentException("Фамилия автора не может быть null");
+        }
         this.authorName = authorName;
         this.authorLastName = authorLastName;
         this.authorPatronymic = authorPatronymic;
+
     }
 
     public int getId() {
@@ -94,4 +102,5 @@ public final class Author {
                 ", AuthorPatronymic='" + authorPatronymic + '\'' +
                 '}';
     }
+
 }

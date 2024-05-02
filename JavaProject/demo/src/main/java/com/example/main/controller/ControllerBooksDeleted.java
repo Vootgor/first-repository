@@ -25,4 +25,5 @@ public class ControllerBooksDeleted {
         serviceBook.deleteAllBooks();
         return "Deleted all books";
     }
+
 }
