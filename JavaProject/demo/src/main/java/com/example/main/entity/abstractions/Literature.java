@@ -24,7 +24,7 @@ public abstract class Literature {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "genre")
-    private Genre genre;
+    private Genre genre = Genre.UNKNOWN;
 
     @Column(name = "quantity_of_page")
     private int quantityOfPage;
@@ -35,7 +35,7 @@ public abstract class Literature {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "evaluation_of_book")
-    private EvaluationOfBook evaluationOfBook;
+    private EvaluationOfBook evaluationOfBook = EvaluationOfBook.NO_GRADES;
 
     @Column(name = "comment_of_book")
     private String commentOfBook;

@@ -1,4 +1,4 @@
-package com.example.main.controller;
+package com.example.main.controller.only_for_books;
 
 import com.example.main.entity.Book;
 import com.example.main.service.ServiceBook;

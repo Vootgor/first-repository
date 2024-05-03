@@ -17,6 +17,7 @@ public class ServiceAuthorSearchImpl implements ServiceAuthor {
     @Autowired
     private RepositoryAuthor repositoryAuthor;
 
+
     @Override
     @Transactional
     public List<Author> getAllAuthors() {
@@ -28,7 +29,7 @@ public class ServiceAuthorSearchImpl implements ServiceAuthor {
     public Author getAuthor(int id) {
         Author author = null;
         Optional<Author> optional = repositoryAuthor.findById(id);
-        if (optional.isPresent()){
+        if (optional.isPresent()) {
             author = optional.get();
         }
         return author;
@@ -42,10 +43,21 @@ public class ServiceAuthorSearchImpl implements ServiceAuthor {
 
     @Override
     @Transactional
+    public List<Author> saveAllAuthors(List<Author> authors) {
+       return repositoryAuthor.saveAll(authors);
+    }
+
+    @Override
+    @Transactional
     public void deleteAuthor(int id) {
         repositoryAuthor.deleteById(id);
     }
 
+    @Override
+    @Transactional
+    public void deletedAllAuthors() {
+        repositoryAuthor.deleteAll();
+    }
 
 
     @Override
@@ -62,8 +74,20 @@ public class ServiceAuthorSearchImpl implements ServiceAuthor {
 
     @Override
     @Transactional
-    public List<Author> findByAuthorFullName(String authorName, String authorLastName, String authorPatronymic) {
-        return repositoryAuthor.findByAuthorNameAndAuthorLastNameAndAuthorPatronymic(authorName, authorLastName,authorPatronymic);
+    public List<Author> findByAuthorNameAndAuthorLastNameAndAuthorPatronymic(String authorName, String authorLastName, String authorPatronymic) {
+        return repositoryAuthor.findByAuthorNameAndAuthorLastNameAndAuthorPatronymic(authorName, authorLastName, authorPatronymic);
     }
+
+    @Override
+    public List<Author> findByAuthorFullName(String authorName, String authorLastName, String authorPatronymic) {
+        return repositoryAuthor.findByAuthorFullName(authorName,authorLastName,authorPatronymic);
+    }
+
+
+    @Override
+    public boolean existsByFIO(String authorName, String authorLastName, String authorPatronymic) {
+        return repositoryAuthor.existsByAuthorNameAndAuthorLastNameAndAuthorPatronymic(authorName, authorLastName, authorPatronymic);
+    }
+
 
 }
