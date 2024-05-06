@@ -28,6 +28,9 @@ public interface ServiceAuthor {
     public List<Author> findByAuthorNameAndAuthorLastNameAndAuthorPatronymic(String authorName, String authorLastName, String authorPatronymic);
 
     public List<Author> findByAuthorFullName(String authorName, String authorLastName, String authorPatronymic);
+
     //проверка существования автора
     boolean existsByFIO(String authorName, String authorLastName, String authorPatronymic);
+
+    public void insertBookAuthor(int bookId, int authorId);
 }

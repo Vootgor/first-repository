@@ -49,6 +49,7 @@ public class ControllerAuthorsWithBooksMethods {
                 bookAuthorDTO.getReadingStatus(), bookAuthorDTO.getEvaluationOfBook(), bookAuthorDTO.getCommentOfBook(),
                 LocalDateTime.now(), null, Set.of(author), null);
         serviceBook.saveOrUpdateBook(book);
+        serviceAuthor.insertBookAuthor(book.getId(),author.getId());
         return "Добавлена книга " + book + "\nДобавлен автор " + author;
     }
 

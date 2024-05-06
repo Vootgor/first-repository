@@ -79,14 +79,22 @@ public class ServiceAuthorSearchImpl implements ServiceAuthor {
     }
 
     @Override
+    @Transactional
     public List<Author> findByAuthorFullName(String authorName, String authorLastName, String authorPatronymic) {
         return repositoryAuthor.findByAuthorFullName(authorName,authorLastName,authorPatronymic);
     }
 
 
     @Override
+    @Transactional
     public boolean existsByFIO(String authorName, String authorLastName, String authorPatronymic) {
         return repositoryAuthor.existsByAuthorNameAndAuthorLastNameAndAuthorPatronymic(authorName, authorLastName, authorPatronymic);
+    }
+
+    @Override
+    @Transactional
+    public void insertBookAuthor(int bookId, int authorId) {
+        repositoryAuthor.insertBookAuthor(bookId,authorId);
     }
 
 
