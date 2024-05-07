@@ -1,9 +1,11 @@
 package com.example.main.entity;
 
 
+import com.example.main.entity.utilities.ElevateFirstLetter;
+import com.example.main.entity.utilities.NullAndEmpty;
+import com.example.main.entity.utilities.SymbolsAndWhitespace;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -28,7 +30,7 @@ public final class Author {
 
     @JsonIgnoreProperties(value = "authors")
     @ManyToMany(cascade = {CascadeType.PERSIST
-            ,CascadeType.MERGE, CascadeType.REFRESH , CascadeType.DETACH}
+            , CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}
             , fetch = FetchType.EAGER)
     @JoinTable(
             name = "books_authors",
@@ -39,18 +41,35 @@ public final class Author {
 
     public Author() {
     }
+
     @JsonCreator
     public Author(String authorName, String authorLastName, String authorPatronymic) {
-        if (authorName == null){
+        if (NullAndEmpty.stringIsNullOrEmpty(authorName)) {
             throw new IllegalArgumentException("Имя автора не может быть null");
         }
-        if (authorLastName == null){
+        if (authorLastName == null || authorLastName.isEmpty()) {
             throw new IllegalArgumentException("Фамилия автора не может быть null");
         }
+
+        if (authorPatronymic != null && !authorPatronymic.isEmpty()) {
+            System.out.println("Удалили символы из отчества");
+            authorPatronymic = SymbolsAndWhitespace.removalSymbolsAndWhitespace(authorPatronymic);
+            if (authorPatronymic.isEmpty()) {
+                System.out.println("Подняли букву отчества");
+                authorPatronymic = ElevateFirstLetter.raiseFirstLetter(authorPatronymic);
+            }
+        }
+
+        if (authorPatronymic != null) {
+            authorPatronymic = ElevateFirstLetter.raiseFirstLetter(authorPatronymic);
+        }
+
+        authorName = ElevateFirstLetter.raiseFirstLetter(authorName);
+        authorLastName = ElevateFirstLetter.raiseFirstLetter(authorLastName);
+
         this.authorName = authorName;
         this.authorLastName = authorLastName;
         this.authorPatronymic = authorPatronymic;
-
     }
 
     public int getId() {
