@@ -51,18 +51,25 @@ public final class Author {
             throw new IllegalArgumentException("Фамилия автора не может быть null");
         }
 
-        if (authorPatronymic != null && !authorPatronymic.isEmpty()) {
+        /*if (authorPatronymic != null && !authorPatronymic.isEmpty()) {
             System.out.println("Удалили символы из отчества");
             authorPatronymic = SymbolsAndWhitespace.removalSymbolsAndWhitespace(authorPatronymic);
             if (authorPatronymic.isEmpty()) {
                 System.out.println("Подняли букву отчества");
                 authorPatronymic = ElevateFirstLetter.raiseFirstLetter(authorPatronymic);
             }
-        }
+        }*/
 
-        if (authorPatronymic != null) {
-            authorPatronymic = ElevateFirstLetter.raiseFirstLetter(authorPatronymic);
-        }
+        /*if (authorPatronymic != null) {
+            System.out.println("Удалили символы из отчества");
+            authorPatronymic = SymbolsAndWhitespace.removalSymbolsAndWhitespace(authorPatronymic);
+            if (!authorPatronymic.isEmpty()){
+                System.out.println("Подняли первую букву");
+                ElevateFirstLetter.raiseFirstLetter(authorLastName);
+            }else authorPatronymic = null;
+            System.out.println("Передали в конструктор отчество " + authorPatronymic);
+        }*/
+
 
         authorName = ElevateFirstLetter.raiseFirstLetter(authorName);
         authorLastName = ElevateFirstLetter.raiseFirstLetter(authorLastName);

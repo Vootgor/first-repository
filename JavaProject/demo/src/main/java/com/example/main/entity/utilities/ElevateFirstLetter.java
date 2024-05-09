@@ -1,8 +1,14 @@
 package com.example.main.entity.utilities;
 
+/** Утилитарный класс для преобразование первой буквы в переданной строке в верхний регистр.*/
 public final class ElevateFirstLetter {
 
-    //проверяет если строка не пустая то поднимает первую букву
+    /**
+     * проверяет если строка не пустая, преобразует все символы в нижний регистр затем поднимает первую букву
+     * @param word строка в которой нужно поднять первую букву
+     * @return возвращат строку с поднятой первой буквой
+     */
+
     public static String raiseFirstLetter(String word) {
         if (word.isEmpty()) {
             return word;

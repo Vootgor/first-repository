@@ -1,9 +1,13 @@
 package com.example.main.entity.utilities;
 
+/** Утилитарный класс для пустых и нулевых значений.*/
 public final class NullAndEmpty {
-
+    /**
+     * Проверяет что строка null или пустая.
+     * @param string строка, в которой проверяется значение.
+     * @return  возвращает true если строка null или пустая.
+     * */
     public static boolean stringIsNullOrEmpty(String string) {
-        System.out.println("Отработал метод stringIsNullOrEmpty");
         return string == null || string.isEmpty();
     }
 }
