@@ -34,6 +34,6 @@ public interface RepositoryAuthor extends JpaRepository<Author, Integer> {
     //todo Переделать nativeQuery = true на nativeQuery = false, переписать на JPQL(сейчас используется нативный SQL запрос)
     @Modifying
     @Query(value = "INSERT INTO books_authors (author_id, book_id) VALUES (:authorId, :bookId)", nativeQuery = true)
-    void insertBookAuthor(int bookId, int authorId);
+    void bindBookToAuthor(int bookId, int authorId);
 
 }

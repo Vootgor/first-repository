@@ -93,8 +93,8 @@ public class ServiceAuthorSearchImpl implements ServiceAuthor {
 
     @Override
     @Transactional
-    public void insertBookAuthor(int bookId, int authorId) {
-        repositoryAuthor.insertBookAuthor(bookId,authorId);
+    public void bindBookToAuthor(int bookId, int authorId) {
+        repositoryAuthor.bindBookToAuthor(bookId,authorId);
     }
 
 

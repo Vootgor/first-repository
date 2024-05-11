@@ -12,18 +12,19 @@ public final class CheckingAddAuthor {
      *
      * @param authorName       принимает имя автора, если значение null или пустое бросает exception
      *                         , иначе удаляем пробелы и поднимаем первую букву. Еще раз проверяем пустое
-     *                         ли значение, если пустое то бросаем exception.
+     *                         ли значение или состоит только из символов (путём удаления пробелов и символов)
+     *                         , если это так бросаем exception.
      * @param authorLastName   принимает фамилию автора, если значение null или пустое бросает exception
-     *      *                  , иначе удаляем пробелы и поднимаем первую букву. Еще раз проверяем пустое
-     *      *                         ли значение, если пустое то бросаем exception.
-     * @param authorPatronymic принимает отчество автора, в которой проверяется равно ли значение null.
-     *                         Если не равно, то удаляет пробелы и поднимает первую букву,
-     *                         затем еще раз проверяет пуста ли строка и присваиваем null если это так
-     *                         , иначе передаём отформатированную строку.
+     *                         *                  , иначе удаляем пробелы и поднимаем первую букву. Еще раз проверяем пустое
+     *                         *                  ли значение или состоит только из символов (путём удаления пробелов и символов)
+     *                         *                  , если это так бросаем exception.
+     * @param authorPatronymic принимает отчество автора, проверяем равно ли значение null. Если не равно
+     *                         , то удаляет пробелы и поднимает первую букву.
+     *                         Еще раз проверяем пустое ли значение или состоит только из символов
+     *                         (путём удаления пробелов и символов), если это так бросаем exception.
      * @return возвращает экземпляр класса Author созданный с помощью переданых строк которые были
      * проверенны и отформатированны.
      */
-    //todo сделать проверку на строку только из символов и пробелов, выбрасывать exception
     public static Author checkingTransmittedArgumentsForAuthor(String authorName
             , String authorLastName, String authorPatronymic) {
 
@@ -34,7 +35,7 @@ public final class CheckingAddAuthor {
         } else {
             authorName = authorName.trim();
             authorName = ElevateFirstLetter.raiseFirstLetter(authorName);
-            if (authorName.isEmpty()) {
+            if (SymbolsAndWhitespace.removalSymbolsAndWhitespace(authorName).isEmpty()) {
                 throw new IllegalArgumentException("Братюнь имя автора не может быть пустым или состоять " +
                         "только из символов и пробелов. Сделай нормально");
             }
@@ -46,7 +47,7 @@ public final class CheckingAddAuthor {
         } else {
             authorLastName = authorLastName.trim();
             authorLastName = ElevateFirstLetter.raiseFirstLetter(authorLastName);
-            if (authorLastName.isEmpty()) {
+            if (SymbolsAndWhitespace.removalSymbolsAndWhitespace(authorLastName).isEmpty()) {
                 throw new IllegalArgumentException("Братюнь фамилия автора не может быть пустой или состоять " +
                         "только из символов и пробелов. Сделай нормально");
             }
@@ -54,12 +55,11 @@ public final class CheckingAddAuthor {
 
         //проверка отчества
         if (authorPatronymic != null) {
-            System.out.println("Удаляем пробелы из отчества метод CheckingAddAuthor");
             authorPatronymic = authorPatronymic.trim();
-            System.out.println("Поднимаем первую букву отчества метод CheckingAddAuthor");
             authorPatronymic = ElevateFirstLetter.raiseFirstLetter(authorPatronymic);
-            if (!authorPatronymic.isEmpty()) {
-                authorPatronymic = null;
+            if (SymbolsAndWhitespace.removalSymbolsAndWhitespace(authorPatronymic).isEmpty()) {
+                throw new IllegalArgumentException("Братюнь отчество автора не может состоять " +
+                        "только из символов и пробелов. Сделай нормально");
             }
         }
 

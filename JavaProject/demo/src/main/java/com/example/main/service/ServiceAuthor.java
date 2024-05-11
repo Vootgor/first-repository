@@ -32,5 +32,5 @@ public interface ServiceAuthor {
     //проверка существования автора
     boolean existsByFIO(String authorName, String authorLastName, String authorPatronymic);
 
-    public void insertBookAuthor(int bookId, int authorId);
+    public void bindBookToAuthor(int bookId, int authorId);
 }

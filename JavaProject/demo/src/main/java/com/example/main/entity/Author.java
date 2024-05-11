@@ -45,35 +45,11 @@ public final class Author {
     @JsonCreator
     public Author(String authorName, String authorLastName, String authorPatronymic) {
         if (NullAndEmpty.stringIsNullOrEmpty(authorName)) {
-            throw new IllegalArgumentException("Имя автора не может быть null");
+            throw new IllegalArgumentException("Имя автора не может быть null. Метод конструктора.");
         }
         if (authorLastName == null || authorLastName.isEmpty()) {
-            throw new IllegalArgumentException("Фамилия автора не может быть null");
+            throw new IllegalArgumentException("Фамилия автора не может быть null. Метод конструктора.");
         }
-
-        /*if (authorPatronymic != null && !authorPatronymic.isEmpty()) {
-            System.out.println("Удалили символы из отчества");
-            authorPatronymic = SymbolsAndWhitespace.removalSymbolsAndWhitespace(authorPatronymic);
-            if (authorPatronymic.isEmpty()) {
-                System.out.println("Подняли букву отчества");
-                authorPatronymic = ElevateFirstLetter.raiseFirstLetter(authorPatronymic);
-            }
-        }*/
-
-        /*if (authorPatronymic != null) {
-            System.out.println("Удалили символы из отчества");
-            authorPatronymic = SymbolsAndWhitespace.removalSymbolsAndWhitespace(authorPatronymic);
-            if (!authorPatronymic.isEmpty()){
-                System.out.println("Подняли первую букву");
-                ElevateFirstLetter.raiseFirstLetter(authorLastName);
-            }else authorPatronymic = null;
-            System.out.println("Передали в конструктор отчество " + authorPatronymic);
-        }*/
-
-
-        authorName = ElevateFirstLetter.raiseFirstLetter(authorName);
-        authorLastName = ElevateFirstLetter.raiseFirstLetter(authorLastName);
-
         this.authorName = authorName;
         this.authorLastName = authorLastName;
         this.authorPatronymic = authorPatronymic;

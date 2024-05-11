@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,15 +24,9 @@ public class ControllerAuthorsWithBooksMethods {
     @Autowired
     private ServiceAuthor serviceAuthor;
 
-    @PostMapping("/test")
-    public String test(@RequestBody DtoAuthorsWithBooks bookAuthorDTO) {
-        System.out.println(bookAuthorDTO);
-        boolean b = serviceAuthor.existsByFIO(bookAuthorDTO.getAuthorName(), bookAuthorDTO.getAuthorLastName(), bookAuthorDTO.getAuthorPatronymic());
-        return String.valueOf(b);
-    }
-
 
     //todo добавить логику которая будет добавлять книгу к текущему автору если он уже есть
+    //todo переписать извлечение автора из коллекции с помощью Stream
     @PostMapping("/library/booksAndAuthors/add")
     public String saveBookAndAuthor(@RequestBody DtoAuthorsWithBooks bookAuthorDTO) {
 
@@ -39,26 +34,40 @@ public class ControllerAuthorsWithBooksMethods {
                 , bookAuthorDTO.getAuthorLastName(), bookAuthorDTO.getAuthorPatronymic());
         System.out.println("Спарсили " + parseAuthor);
 
-        System.out.println("Ищем " + parseAuthor.getAuthorName()
-                + parseAuthor.getAuthorLastName() + parseAuthor.getAuthorPatronymic() );
-        List<Author> otherAuthors = serviceAuthor.findByAuthorNameAndAuthorLastNameAndAuthorPatronymic(parseAuthor.getAuthorName()
-                , parseAuthor.getAuthorLastName(), parseAuthor.getAuthorPatronymic());
+        System.out.println("Ищем " + parseAuthor.getAuthorName() + " "
+                + parseAuthor.getAuthorLastName() + " " + parseAuthor.getAuthorPatronymic());
 
-        if (!otherAuthors.isEmpty()) {
-            otherAuthors.forEach(System.out::println);
-            return "Автор уже есть. Метод saveBookAndAuthor";
+        List<Author> otherAuthors;
+        Author otherAuthor;
+
+
+        if (serviceAuthor.existsByFIO(parseAuthor.getAuthorName(), parseAuthor.getAuthorLastName()
+                , parseAuthor.getAuthorPatronymic())) {
+            otherAuthors = serviceAuthor.findByAuthorFullName(parseAuthor.getAuthorName()
+                    , parseAuthor.getAuthorLastName(), parseAuthor.getAuthorPatronymic());
+            try {
+                if (otherAuthors.size() > 1) {
+                    throw new IllegalArgumentException("Существует более одно автора с данным ФИО");
+                } else {
+                    otherAuthor = otherAuthors.get(0);
+                }
+            } finally {
+                System.out.println("Найдены авторы");
+                otherAuthors.forEach(System.out::println);
+            }
+        } else {
+            otherAuthor = new Author(parseAuthor.getAuthorName(), parseAuthor.getAuthorLastName()
+                    , parseAuthor.getAuthorPatronymic());
+            serviceAuthor.saveOrUpdateAuthor(otherAuthor);
         }
-
-        Author author = new Author(parseAuthor.getAuthorName(), parseAuthor.getAuthorLastName()
-                , parseAuthor.getAuthorPatronymic());
-        serviceAuthor.saveOrUpdateAuthor(author);
 
         Book book = new Book(bookAuthorDTO.getTitleOfBook(), bookAuthorDTO.getGenre(), bookAuthorDTO.getQuantityOfPage(),
                 bookAuthorDTO.getReadingStatus(), bookAuthorDTO.getEvaluationOfBook(), bookAuthorDTO.getCommentOfBook(),
-                LocalDateTime.now(), null, Set.of(author), null);
+                LocalDateTime.now(), null, Set.of(otherAuthor), null);
+
         serviceBook.saveOrUpdateBook(book);
-        serviceAuthor.insertBookAuthor(book.getId(), author.getId());
-        return "Добавлена книга " + book + "\nДобавлен автор " + author;
+        serviceAuthor.bindBookToAuthor(book.getId(), otherAuthor.getId());
+        return "Добавлена книга " + book + "\nДобавлен автор " + otherAuthor;
     }
 
 
