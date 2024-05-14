@@ -4,6 +4,7 @@ import com.example.main.dto.DtoAuthorsWithBooks;
 import com.example.main.entity.Author;
 import com.example.main.entity.Book;
 import com.example.main.entity.utilities.CheckingAddAuthor;
+import com.example.main.entity.utilities.CheckingAddBook;
 import com.example.main.service.ServiceAuthor;
 import com.example.main.service.ServiceBook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -25,13 +25,26 @@ public class ControllerAuthorsWithBooksMethods {
     private ServiceAuthor serviceAuthor;
 
 
-    //todo добавить логику которая будет добавлять книгу к текущему автору если он уже есть
+    /**
+     * Метод из DTO создаёт экземпляры Author и Book. Входящие данные проходят через проверку на верное заполнение.
+     * Затем происходит поиск совпадений в базе.
+     * Если найдено более одного автора то выбрасывается exception, если
+     * автор отсутствует, то он сохраняется в базу, если найден один автор, то он подставляется для последующей
+     * связи с книгой.
+     * Книга проверяется по названию и автору связанному с ней. Если есть совпадения то выбрасывается
+     * exception.
+     * @param bookAuthorAndBookDTO в параметрах передаются данные для последующего создания экземпляров классов
+     *                             Author и Book.
+     * @return возвращает сообщение о том какие автор и книга были добавлены.
+     */
     //todo переписать извлечение автора из коллекции с помощью Stream
+    //todo нужно сделать еще один метод проверки книги по всем полям кроме автора и файла.
     @PostMapping("/library/booksAndAuthors/add")
-    public String saveBookAndAuthor(@RequestBody DtoAuthorsWithBooks bookAuthorDTO) {
+    public String saveBookAndAuthor(@RequestBody DtoAuthorsWithBooks bookAuthorAndBookDTO) {
 
-        Author parseAuthor = CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(bookAuthorDTO.getAuthorName()
-                , bookAuthorDTO.getAuthorLastName(), bookAuthorDTO.getAuthorPatronymic());
+        //проверка автора
+        Author parseAuthor = CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(bookAuthorAndBookDTO.getAuthorName()
+                , bookAuthorAndBookDTO.getAuthorLastName(), bookAuthorAndBookDTO.getAuthorPatronymic());
         System.out.println("Спарсили " + parseAuthor);
 
         System.out.println("Ищем " + parseAuthor.getAuthorName() + " "
@@ -39,7 +52,6 @@ public class ControllerAuthorsWithBooksMethods {
 
         List<Author> otherAuthors;
         Author otherAuthor;
-
 
         if (serviceAuthor.existsByFIO(parseAuthor.getAuthorName(), parseAuthor.getAuthorLastName()
                 , parseAuthor.getAuthorPatronymic())) {
@@ -61,8 +73,22 @@ public class ControllerAuthorsWithBooksMethods {
             serviceAuthor.saveOrUpdateAuthor(otherAuthor);
         }
 
-        Book book = new Book(bookAuthorDTO.getTitleOfBook(), bookAuthorDTO.getGenre(), bookAuthorDTO.getQuantityOfPage(),
-                bookAuthorDTO.getReadingStatus(), bookAuthorDTO.getEvaluationOfBook(), bookAuthorDTO.getCommentOfBook(),
+
+        //проверка книги
+        Book parseBook = CheckingAddBook.checkingTransmittedArgumentsForBook(bookAuthorAndBookDTO.getTitleOfBook()
+                , bookAuthorAndBookDTO.getGenre(),bookAuthorAndBookDTO.getQuantityOfPage(),bookAuthorAndBookDTO.getReadingStatus()
+                ,bookAuthorAndBookDTO.getEvaluationOfBook(), bookAuthorAndBookDTO.getCommentOfBook(),LocalDateTime.now(),null
+                ,Set.of(otherAuthor),null);
+
+        if (serviceBook.existsByTitleOfBookAndAuthors(parseBook.getTitleOfBook(),otherAuthor)){
+            serviceBook.findByTitleOfBook(parseBook.getTitleOfBook());
+            throw new IllegalArgumentException("Данная книга уже существует " + parseBook + " с этим автором " + otherAuthor);
+        }
+
+
+
+        Book book = new Book(bookAuthorAndBookDTO.getTitleOfBook(), bookAuthorAndBookDTO.getGenre(), bookAuthorAndBookDTO.getQuantityOfPage(),
+                bookAuthorAndBookDTO.getReadingStatus(), bookAuthorAndBookDTO.getEvaluationOfBook(), bookAuthorAndBookDTO.getCommentOfBook(),
                 LocalDateTime.now(), null, Set.of(otherAuthor), null);
 
         serviceBook.saveOrUpdateBook(book);

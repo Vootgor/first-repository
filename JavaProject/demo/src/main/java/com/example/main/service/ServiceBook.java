@@ -21,14 +21,22 @@ public interface ServiceBook {
 //----------------------------------------------------------------------------
 // Creating method
 
+//удаление всех книг
     public void deleteAllBooks();
+
 //ищем по названию книги
     public List<Book> findByTitleOfBook(String titleOfBook);
+
 //поиск по жанру
     public List<Book> findByGenre(Genre genre);
+
 //поиск по статусу чтения
     public List<Book> findByReadingStatus(ReadingStatus readingStatus);
+
 //поиск по оценке
     public List<Book> findByEvaluationOfBook(EvaluationOfBook evaluationOfBook);
+
+//проверка существования книги по названию
+    public boolean existsByTitleOfBookAndAuthors(String titleOfBook, Author author);
 
 }

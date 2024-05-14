@@ -1,6 +1,7 @@
 package com.example.main.service.search_books;
 
 import com.example.main.dao.RepositoryBook;
+import com.example.main.entity.Author;
 import com.example.main.entity.Book;
 import com.example.main.entity.enam.EvaluationOfBook;
 import com.example.main.entity.enam.Genre;
@@ -77,5 +78,11 @@ public class ServiceBookSearchImpl implements ServiceBook {
     public List<Book> findByEvaluationOfBook(EvaluationOfBook evaluationOfBook) {
         return repositoryBook.findByEvaluationOfBook(evaluationOfBook);
     }
+
+    @Override
+    public boolean existsByTitleOfBookAndAuthors(String titleOfBook, Author author) {
+        return repositoryBook.existsByTitleOfBookAndAuthors(titleOfBook, author);
+    }
+
 
 }
