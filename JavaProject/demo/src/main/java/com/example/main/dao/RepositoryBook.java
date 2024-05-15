@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public interface RepositoryBook extends JpaRepository<Book,Integer> {
@@ -27,6 +26,6 @@ public interface RepositoryBook extends JpaRepository<Book,Integer> {
     List<Book> findByEvaluationOfBook(EvaluationOfBook evaluationOfBook);
 
     //проверить существование книги
-
     boolean existsByTitleOfBookAndAuthors(String titleOfBook, Author author);
+
 }
