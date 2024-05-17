@@ -8,12 +8,9 @@ public final class GettingFileType {
      * @return обрезанное слово
      */
     public static String gettingFileType(String word){
-        System.out.println("Получили " + word);
         String fileType;
         int position = word.lastIndexOf('.');
-        System.out.println("Нашли точку на позиции " + position);
         fileType = word.substring(position + 1);
-        System.out.println("После обрезания получили " + fileType);
         return fileType;
     }
 

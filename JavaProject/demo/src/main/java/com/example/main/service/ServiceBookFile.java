@@ -13,4 +13,5 @@ public interface ServiceBookFile {
     BookFile getBookFile(int id);
     void saveOrUpdate(BookFile bookFile);
     void deletedBookFile(int id);
+    void deletedAllBookFiles();
 }

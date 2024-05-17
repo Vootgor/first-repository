@@ -39,4 +39,9 @@ public class ServiceBookFileImpl implements ServiceBookFile{
     public void deletedBookFile(int id) {
         repositoryBookFile.deleteById(id);
     }
+
+    @Override
+    public void deletedAllBookFiles() {
+        repositoryBookFile.deleteAll();
+    }
 }

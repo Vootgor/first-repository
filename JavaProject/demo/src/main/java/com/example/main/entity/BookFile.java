@@ -1,6 +1,7 @@
 package com.example.main.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Arrays;
@@ -23,9 +24,11 @@ public final class BookFile {
     @Column(name = "file_type")
     private String fileType;
 
+    @JsonIgnore
     @Column(name = "file_data")
     private byte [] fileData;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST
             ,CascadeType.MERGE, CascadeType.REFRESH , CascadeType.DETACH})
     @JoinColumn(name = "book_id") // Связь с полем в таблице book_files

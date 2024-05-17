@@ -1,11 +1,13 @@
 package com.example.main.controller.only_for_books;
 
+import com.example.main.dto.GeneralResponse;
 import com.example.main.entity.Book;
 import com.example.main.entity.enam.EvaluationOfBook;
 import com.example.main.entity.enam.Genre;
 import com.example.main.entity.enam.ReadingStatus;
 import com.example.main.service.ServiceBook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,12 @@ public class ControllerBookFind {
     }
 
     @GetMapping("/books/{id}")
-    public Book showBook(@PathVariable int id){
-        return serviceBook.getBook(id);
+    public ResponseEntity<GeneralResponse<Book>> showBook(@PathVariable int id){
+        Book book = serviceBook.getBook(id);
+        if (book == null){
+            return ResponseEntity.status(404).body(new GeneralResponse<>("book is not found", null));
+        }
+        return ResponseEntity.ok(new GeneralResponse<>(null,book));
     }
 
 
