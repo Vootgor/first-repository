@@ -42,6 +42,11 @@ public class ControllerAuthorsWithBooksMethods {
     @PostMapping("/library/booksAndAuthors/add")
     public String saveBookAndAuthor(@RequestBody DtoAuthorsWithBooks bookAuthorAndBookDTO) {
 
+        System.out.println("приходит " + bookAuthorAndBookDTO);
+
+        System.out.println("EVAL " + bookAuthorAndBookDTO.getEvaluationOfBook().toString());
+
+
         //проверка автора
         Author parseAuthor = CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(bookAuthorAndBookDTO.getAuthorName()
                 , bookAuthorAndBookDTO.getAuthorLastName(), bookAuthorAndBookDTO.getAuthorPatronymic());
@@ -75,10 +80,17 @@ public class ControllerAuthorsWithBooksMethods {
 
 
         //проверка книги
-        Book parseBook = CheckingAddBook.checkingTransmittedArgumentsForBook(bookAuthorAndBookDTO.getTitleOfBook()
-                , bookAuthorAndBookDTO.getGenre(),bookAuthorAndBookDTO.getQuantityOfPage(),bookAuthorAndBookDTO.getReadingStatus()
-                ,bookAuthorAndBookDTO.getEvaluationOfBook(), bookAuthorAndBookDTO.getCommentOfBook(),LocalDateTime.now(),null
-                ,Set.of(otherAuthor),null);
+        Book parseBook = CheckingAddBook.checkingTransmittedArgumentsForBook(
+                bookAuthorAndBookDTO.getTitleOfBook(),
+                bookAuthorAndBookDTO.getGenre(),
+                bookAuthorAndBookDTO.getQuantityOfPage(),
+                bookAuthorAndBookDTO.getReadingStatus(),
+                bookAuthorAndBookDTO.getEvaluationOfBook(),
+                bookAuthorAndBookDTO.getCommentOfBook(),
+                LocalDateTime.now(),
+                null,Set.of(otherAuthor),
+                null
+        );
 
         if (serviceBook.existsByTitleOfBookAndAuthors(parseBook.getTitleOfBook(),otherAuthor)){
             serviceBook.findByTitleOfBook(parseBook.getTitleOfBook());
@@ -86,14 +98,9 @@ public class ControllerAuthorsWithBooksMethods {
         }
 
 
-
-        Book book = new Book(bookAuthorAndBookDTO.getTitleOfBook(), bookAuthorAndBookDTO.getGenre(), bookAuthorAndBookDTO.getQuantityOfPage(),
-                bookAuthorAndBookDTO.getReadingStatus(), bookAuthorAndBookDTO.getEvaluationOfBook(), bookAuthorAndBookDTO.getCommentOfBook(),
-                LocalDateTime.now(), null, Set.of(otherAuthor), null);
-
-        serviceBook.saveOrUpdateBook(book);
-        serviceAuthor.bindBookToAuthor(book.getId(), otherAuthor.getId());
-        return "Добавлена книга " + book + "\nДобавлен автор " + otherAuthor;
+        serviceBook.saveOrUpdateBook(parseBook);
+        serviceAuthor.bindBookToAuthor(parseBook.getId(), otherAuthor.getId());
+        return "Добавлена книга " + parseBook + "\nДобавлен автор " + otherAuthor;
     }
 
 

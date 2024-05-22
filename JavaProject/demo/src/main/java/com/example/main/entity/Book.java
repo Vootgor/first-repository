@@ -51,11 +51,4 @@ public final class Book extends Literature {
         this.bookFiles = bookFiles;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "authors=" + authors +
-                ", bookFiles=" + bookFiles +
-                '}';
-    }
 }

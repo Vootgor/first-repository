@@ -21,13 +21,11 @@ public class ServiceBookSearchImpl implements ServiceBook {
     private RepositoryBook repositoryBook;
 
     @Override
-    @Transactional
     public List<Book> getAllBooks() {
         return repositoryBook.findAll();
     }
 
     @Override
-    @Transactional
     public Book getBook(int id) {
         Book book = null;
         Optional<Book> optional = repositoryBook.findById(id);
@@ -56,25 +54,21 @@ public class ServiceBookSearchImpl implements ServiceBook {
     }
 
     @Override
-    @Transactional
     public List<Book> findByTitleOfBook(String titleOfBook) {
         return repositoryBook.findByTitleOfBook(titleOfBook);
     }
 
     @Override
-    @Transactional
     public List<Book> findByGenre(Genre genre) {
         return repositoryBook.findByGenre(genre);
     }
 
     @Override
-    @Transactional
     public List<Book> findByReadingStatus(ReadingStatus readingStatus) {
         return repositoryBook.findByReadingStatus(readingStatus);
     }
 
     @Override
-    @Transactional
     public List<Book> findByEvaluationOfBook(EvaluationOfBook evaluationOfBook) {
         return repositoryBook.findByEvaluationOfBook(evaluationOfBook);
     }
