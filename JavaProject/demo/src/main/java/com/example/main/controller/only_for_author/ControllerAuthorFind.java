@@ -5,28 +5,44 @@ import com.example.main.entity.Author;
 import com.example.main.service.ServiceAuthor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+/** Класс является контроллером содержащим методы для поиска авторов */
 @RestController
 public class ControllerAuthorFind {
 
     @Autowired
-    ServiceAuthor serviceAuthor;
+    private ServiceAuthor serviceAuthor;
 
-    //вывод всех авторов
+    /**
+     * Метод выводит всех авторов из базы данных
+     * @return возвращает List<Author>
+     */
     @GetMapping("/authors")
     public List<Author> showAllAuthors() {
         return serviceAuthor.getAllAuthors();
     }
 
-    // вывод автора по id
+    /**
+     * Метод находит автора по id и возвращает его
+     * @param id число являющееся id автора
+     * @return возвращает автора
+     */
     @GetMapping("/authors/{id}")
     public Author showAuthor(@PathVariable int id) {
         return serviceAuthor.getAuthor(id);
     }
 
-    // поиск автора по ФИО
+    /**
+     * Метод ищет автора в базе данных в зависимости от аргументов переданных в параметры метода.
+     * Проверяет если имя и отчество null то ищет только по фамилии используюя метод findByAuthorLastName,
+     * если отчество null ищет по имени и фамилии с помощью метода findByAuthorNameAndAuthorLastName,
+     * иначе ищет по полному ФИО. Возвращает List найденных авторов.
+     * @param authorName строка являющаяся именем автора. Не обязательный аргумент, может не передаваться.
+     * @param authorLastName строка являющаяся фамилией автора.
+     * @param authorPatronymic строка являющаяся отчеством автора. Не обязательный аргумент, может не передаваться.
+     * @return возвращает List<Author> которые были найдены
+     */
     @GetMapping("/authors/findByAuthor")
     public List<Author> showAuthorByFullName(@RequestParam(required = false) String authorName, @RequestParam() String authorLastName
             , @RequestParam(required = false) String authorPatronymic) {
@@ -40,7 +56,6 @@ public class ControllerAuthorFind {
 
     /** Метод принимает в парамерт экземпляр класса DtoAuthorsWithBooks вытаскивает из него ФИО автора,
      * и проверяет в базе данных существование данного автора.
-     *
      * @param bookAuthorDTO экзепляр класса DtoAuthorsWithBooks
      * @return возвращает true если автор найден и false если автора нет в базе данных
      */

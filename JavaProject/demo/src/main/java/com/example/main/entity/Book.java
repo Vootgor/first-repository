@@ -6,10 +6,10 @@ import com.example.main.entity.enam.Genre;
 import com.example.main.entity.enam.ReadingStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 
+/** Entity class*/
 @Entity
 @Table(name = "books")
 public final class Book extends Literature {

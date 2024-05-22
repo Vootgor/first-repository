@@ -7,12 +7,18 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+/** Класс является контроллером содержащим методы для удаления книг */
 @RestController
 public class ControllerBooksDeleted {
 
     @Autowired
     private ServiceBook serviceBook;
 
+    /**
+     * Метод для удаления книги по id
+     * @param id id книги которую нужно удалить
+     * @return возвращает строку с информацией о том какая книга была удалена
+     */
     @DeleteMapping("/library/books/delete/{id}")
     public String deleteBook(@PathVariable int id){
         Book book = serviceBook.getBook(id);
@@ -20,6 +26,10 @@ public class ControllerBooksDeleted {
         return "Deleted book " + book + " with id " + id;
     }
 
+    /**
+     * Метод удаляет все книги из базы
+     * @return После удаления возвращает сообщение "Deleted all books"
+     */
     @DeleteMapping("/library/books/delete/allBooks")
     public String deletedAllBooks(){
         serviceBook.deleteAllBooks();

@@ -1,7 +1,8 @@
 package com.example.main.entity.utilities;
-
 import com.example.main.entity.Author;
 
+/** Утилитарный класс для проверки правильности написания полей
+ * перед сохранением экземпляра класса Author в базу данных*/
 public final class CheckingAddAuthor {
 
 
@@ -25,6 +26,8 @@ public final class CheckingAddAuthor {
      * @return возвращает экземпляр класса Author созданный с помощью переданых строк которые были
      * проверенны и отформатированны.
      */
+    //todo Возможно стоит переделать чтоб в параметры метода принимался экзепляр класса и работать уже
+    //с его полями не создавая новый экземпляр.
     public static Author checkingTransmittedArgumentsForAuthor(String authorName
             , String authorLastName, String authorPatronymic) {
 

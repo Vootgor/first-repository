@@ -13,19 +13,44 @@ import java.util.List;
 @Repository
 public interface RepositoryBook extends JpaRepository<Book,Integer> {
 
-    //найти по названию книги
+    /**
+     * Находит все книги с названием
+     * @param titleOfBook название книги
+     * @return возвращает список книг
+     */
     List<Book> findByTitleOfBook(String titleOfBook);
 
-    // найти по жанру
+
+    /**
+     * Находит все книги с нужным жанром
+     * @param genre искомый жанр
+     * @return возвращает список книг
+     */
     List<Book> findByGenre(Genre genre);
 
-    //найти по статусу чтения
+
+    /**
+     * Находит все книги с нужным статусом чтения
+     * @param readingStatus статус чтения
+     * @return возвращает список книг
+     */
     List<Book> findByReadingStatus(ReadingStatus readingStatus);
 
-    //найти по оценке книги
+
+    /**
+     * Находит все книги с нужно оценкой
+     * @param evaluationOfBook оценка книги
+     * @return возвращает список книг
+     */
     List<Book> findByEvaluationOfBook(EvaluationOfBook evaluationOfBook);
 
-    //проверить существование книги
+
+    /**
+     * проверить существование книги
+     * @param titleOfBook название книги
+     * @param author автор книги
+     * @return возвращает true или false
+     */
     boolean existsByTitleOfBookAndAuthors(String titleOfBook, Author author);
 
 }

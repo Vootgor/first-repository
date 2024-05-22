@@ -5,6 +5,9 @@ import com.example.main.entity.enam.EvaluationOfBook;
 import com.example.main.entity.enam.Genre;
 import com.example.main.entity.enam.ReadingStatus;
 
+/**
+ * DTO класс содержащий общие поля для создания экземпляров классов Author и Book
+ */
 public class DtoAuthorsWithBooks {
 
     private String titleOfBook;

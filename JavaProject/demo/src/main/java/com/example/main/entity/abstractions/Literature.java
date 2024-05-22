@@ -6,7 +6,6 @@ import com.example.main.entity.enam.Genre;
 import com.example.main.entity.enam.ReadingStatus;
 import jakarta.persistence.*;
 
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 

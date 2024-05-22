@@ -1,11 +1,10 @@
 package com.example.main.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.util.Arrays;
 
+/** Entity class*/
 @Entity
 @Table(name = "book_files")
 public final class BookFile {

@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+/** Класс является контроллером содержащим метод для одновременного добавления автора и книги.
+ * А так же для последующей связи книги с автором
+ * */
 @RestController
 public class ControllerAuthorsWithBooksMethods {
 
@@ -37,8 +40,8 @@ public class ControllerAuthorsWithBooksMethods {
      *                             Author и Book.
      * @return возвращает сообщение о том какие автор и книга были добавлены.
      */
-    //todo переписать извлечение автора из коллекции с помощью Stream
-    //todo нужно сделать еще один метод проверки книги по всем полям кроме автора и файла.
+    //todo переписать извлечение автора из коллекции с помощью Stream.
+    //todo нужно сделать еще один метод проверки книги по всем полям кроме автора и файла. Зачем?
     @PostMapping("/library/booksAndAuthors/add")
     public String saveBookAndAuthor(@RequestBody DtoAuthorsWithBooks bookAuthorAndBookDTO) {
 

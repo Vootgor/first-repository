@@ -41,24 +41,6 @@ public class MainView extends VerticalLayout {
       //  EvaluationOfBook value = evaluationOfBookComboBox.getValue();
         add(new H1("Список книг"), evaluationOfBookComboBox, showAllButton, grid);
     }
-}
 
-//     //метод для теста
-//    MainView() {
-//        add(new H1("Путин охуенный чувак"));
-//        // Создаем кнопку "Добавить книгу"
-//        Button addButton = new Button("Добавить книгу");
-//
-//        // Добавляем стили для кнопки
-//        addButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-//
-//        // Добавляем обработчик нажатия кнопки
-//        addButton.addClickListener(event -> {
-//            restControllerBook.showAllBooks();
-//            // Здесь вы можете добавить логику для обработки нажатия кнопки
-//            // Например, открыть форму для добавления книги
-//        });
-//
-//        // Добавляем кнопку на интерфейс
-//        add(addButton);
-//    }
+
+}

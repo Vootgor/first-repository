@@ -2,6 +2,10 @@ package com.example.main.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * Параметризированный класс для обработки Http статусов и отправки сообщений
+ * @param <T>
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GeneralResponse<T> {
 

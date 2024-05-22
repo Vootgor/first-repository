@@ -1,15 +1,12 @@
 package com.example.main.entity;
 
-
-import com.example.main.entity.utilities.ElevateFirstLetter;
 import com.example.main.entity.utilities.NullAndEmpty;
-import com.example.main.entity.utilities.SymbolsAndWhitespace;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import java.util.Set;
 
+/** Entity class*/
 @Entity
 @Table(name = "authors")
 public final class Author {

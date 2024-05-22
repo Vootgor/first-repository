@@ -9,12 +9,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/** Класс является контроллером содержащим методы для добавления и изменения книг */
 @RestController
 public class ControllerBooksSaveAndUpdate {
 
     @Autowired
     private ServiceBook serviceBook;
 
+    /**
+     * Метод служит для сохранения книги в базу. Перед сохранением проверяется состояние объекта с помощью метода
+     * checkingTransmittedArgumentsForBook
+     * @param book экземпляр класса Book
+     * @return возвращаем новый экземпляр класса после всех проверок
+     */
     @PostMapping("/library/books/add")
     public Book saveBook(@RequestBody Book book) {
         Book parseBook = CheckingAddBook.checkingTransmittedArgumentsForBook(
@@ -34,6 +41,12 @@ public class ControllerBooksSaveAndUpdate {
         return parseBook;
     }
 
+    /**
+     * Метод обновляет данные в существующей книги в базе
+     * @param book переданный экземпляр клааса Book
+     * @return воздвращает измененную книгу
+     */
+//todo сделать логику при изменении статуса на прочитанно проставлялась текущая дата в поле book_was_read_date
     @PutMapping("/library/books/update")
     public Book updateBook(@RequestBody Book book) {
         serviceBook.saveOrUpdateBook(book);
