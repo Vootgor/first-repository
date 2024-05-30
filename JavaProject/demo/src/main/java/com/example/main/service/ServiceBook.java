@@ -2,9 +2,9 @@ package com.example.main.service;
 
 import com.example.main.entity.Author;
 import com.example.main.entity.Book;
-import com.example.main.entity.enam.EvaluationOfBook;
-import com.example.main.entity.enam.Genre;
-import com.example.main.entity.enam.ReadingStatus;
+import com.example.main.entity.enums.EvaluationOfBook;
+import com.example.main.entity.enums.Genre;
+import com.example.main.entity.enums.ReadingStatus;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ public interface ServiceBook {
 
 //----------------------------------------------------------------------------
 // Creating method
+
 
 //удаление всех книг
     public void deleteAllBooks();
@@ -38,5 +39,7 @@ public interface ServiceBook {
 
 //проверка существования книги по названию
     public boolean existsByTitleOfBookAndAuthors(String titleOfBook, Author author);
+
+    boolean existById(int id);
 
 }

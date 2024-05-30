@@ -1,39 +1,39 @@
 package com.example.main.controller.only_for_books;
 
-import com.example.main.dto.GeneralResponse;
+import com.example.main.entity.utilities.GeneralResponse;
 import com.example.main.entity.Book;
-import com.example.main.entity.enam.EvaluationOfBook;
-import com.example.main.entity.enam.Genre;
-import com.example.main.entity.enam.ReadingStatus;
+import com.example.main.entity.enums.EvaluationOfBook;
+import com.example.main.entity.enums.Genre;
+import com.example.main.entity.enums.ReadingStatus;
 import com.example.main.service.ServiceBook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /** Класс является контроллером содержащим методы для поиска книг */
 @RestController
+@RequestMapping("/library/books/find")
 public class ControllerBookFind {
 
     @Autowired
     private ServiceBook serviceBook;
 
     /**
-     * Метод возвращает список всех книг в базе
-     * @return возвращает список всех книг в базе
+     * Метод возвращает список всех книг в базе. Не будет доступен для пользователя.
+     * @return возвращает список всех книг в базе.
      */
-    @GetMapping("/books")
-    public List<Book> showAllBooks(){
-        return serviceBook.getAllBooks();
+    @GetMapping("/showAllBooks")
+    public ResponseEntity<GeneralResponse<List<Book>>> showAllBooks(){
+        return ResponseEntity.ok().body(new GeneralResponse<>(serviceBook.getAllBooks()));
     }
 
     /**
      * Метод возвращает книгу по id или статус 404 если данной книги нет
      * @param id число являющееся id книги в базе
-     * @return возвращает книгу по введёному id или статус 404 если данной книги нет
+     * @return возвращает книгу по введённому id или статус 404 если данной книги нет
      */
-    @GetMapping("/books/{id}")
+    @GetMapping("/showBook/{id}")
     public ResponseEntity<GeneralResponse<Book>> showBook(@PathVariable int id){
         Book book = serviceBook.getBook(id);
         if (book == null){
@@ -48,9 +48,14 @@ public class ControllerBookFind {
      * @param titleOfBook строка с названием книги
      * @return возвращает список книг с этим названием
      */
-    @GetMapping("/books/findByTitleOfBook")
-    public List<Book> showBooksByTitleOfBook(@RequestParam String titleOfBook){
-        return serviceBook.findByTitleOfBook(titleOfBook);
+    @GetMapping("/showBooksByTitleOfBook")
+    public ResponseEntity<GeneralResponse<List<Book>>> showBooksByTitleOfBook(@RequestParam String titleOfBook){
+        List<Book> books = serviceBook.findByTitleOfBook(titleOfBook);
+        if (books.isEmpty()){
+            return ResponseEntity.status(404).body(new GeneralResponse<>(
+                    "С данным названием не найдено ни одной книги"));
+        }
+        return ResponseEntity.ok().body(new GeneralResponse<>(serviceBook.findByTitleOfBook(titleOfBook)));
     }
 
     /**
@@ -58,9 +63,13 @@ public class ControllerBookFind {
      * @param genre жанр книги
      * @return возвращает список книг с данным жанром
      */
-    @GetMapping("/books/genre/{genre}")
-    public List<Book> showBooksByGenre(@PathVariable Genre genre){
-        return serviceBook.findByGenre(genre);
+    @GetMapping("/showBooksByGenre/{genre}")
+    public ResponseEntity<GeneralResponse<List<Book>>> showBooksByGenre(@PathVariable Genre genre){
+        List<Book> books = serviceBook.findByGenre(genre);
+        if (books.isEmpty()){
+            return ResponseEntity.status(404).body(new GeneralResponse<>("Книг с данным жанром не найдено"));
+        }
+        return ResponseEntity.ok().body(new GeneralResponse<>(serviceBook.findByGenre(genre))) ;
     }
 
     /**
@@ -68,9 +77,14 @@ public class ControllerBookFind {
      * @param readingStatus статус чтения
      * @return возвращает список книг с данным статусом
      */
-    @GetMapping("/books/readingStatus/{readingStatus}")
-    public List<Book> showBooksByReadingStatus(@PathVariable ReadingStatus readingStatus){
-        return serviceBook.findByReadingStatus(readingStatus);
+    @GetMapping("/showBooksByReadingStatus/{readingStatus}")
+    public ResponseEntity<GeneralResponse<List<Book>>> showBooksByReadingStatus(@PathVariable ReadingStatus readingStatus){
+        List<Book> books = serviceBook.findByReadingStatus(readingStatus);
+        if (books.isEmpty()){
+            return ResponseEntity.status(404).body(new GeneralResponse<>(
+                    "Книг с данным статусом чтения не найдено"));
+        }
+        return ResponseEntity.ok().body(new GeneralResponse<>(serviceBook.findByReadingStatus(readingStatus)));
     }
 
     /**
@@ -78,11 +92,16 @@ public class ControllerBookFind {
      * @param evaluationOfBook число являющееся оценкой книги
      * @return возвращает список книги с данной оценкой
      */
-    @GetMapping("/books/evaluationOfBook/{evaluationOfBook}")
-    public List<Book> showBooksByEvaluation(@PathVariable EvaluationOfBook evaluationOfBook){
-        return serviceBook.findByEvaluationOfBook(evaluationOfBook);
+    //todo лучше сделать проверку через exist вместо сохранения в лист. А метод findByEvaluationOfBook использовать
+    // только после этой проверки.
+    @GetMapping("/showBooksByEvaluation/{evaluationOfBook}")
+    public ResponseEntity<GeneralResponse<List<Book>>> showBooksByEvaluation(@PathVariable EvaluationOfBook evaluationOfBook){
+        List<Book> books = serviceBook.findByEvaluationOfBook(evaluationOfBook);
+        if (books.isEmpty()){
+            return ResponseEntity.status(404).body(new GeneralResponse<>(
+                    "Книг с данной оценкой не найдено"));
+        }
+        return ResponseEntity.ok().body(new GeneralResponse<>(books));
     }
-
-
 
 }

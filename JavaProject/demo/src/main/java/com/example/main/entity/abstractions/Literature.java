@@ -1,9 +1,9 @@
 package com.example.main.entity.abstractions;
 
 
-import com.example.main.entity.enam.EvaluationOfBook;
-import com.example.main.entity.enam.Genre;
-import com.example.main.entity.enam.ReadingStatus;
+import com.example.main.entity.enums.EvaluationOfBook;
+import com.example.main.entity.enums.Genre;
+import com.example.main.entity.enums.ReadingStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

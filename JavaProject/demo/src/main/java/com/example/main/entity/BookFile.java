@@ -92,6 +92,8 @@ public final class BookFile {
         this.book = book;
     }
 
+    //todo ", fileData=" + Arrays.toString(fileData)
+    // эту строку лучше убрать, т.к она сломает вывод из-за огромного кол-ва байтов
     @Override
     public String toString() {
         return "BookFile{" +
@@ -99,7 +101,6 @@ public final class BookFile {
                 ", fileName='" + fileName + '\'' +
                 ", fileSize=" + fileSize +
                 ", fileType='" + fileType + '\'' +
-                ", fileData=" + Arrays.toString(fileData) +
                 '}';
     }
 }

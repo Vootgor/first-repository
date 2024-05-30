@@ -2,12 +2,12 @@ package com.example.main.front;
 
 import com.example.main.controller.only_for_books.ControllerBookFind;
 import com.example.main.entity.Book;
-import com.example.main.entity.enam.EvaluationOfBook;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,7 +25,7 @@ public class MainView extends VerticalLayout {
 
         Button showAllButton = new Button("Показать все книги");
         showAllButton.addClickListener(event -> {
-            grid.setItems(restControllerBook.showAllBooks());
+            grid.setItems((DataProvider<Book, Void>) restControllerBook.showAllBooks());
         });
         ComboBox<Integer> evaluationOfBookComboBox = new ComboBox<>();
         ArrayList<Integer> arrayList = new ArrayList<>();

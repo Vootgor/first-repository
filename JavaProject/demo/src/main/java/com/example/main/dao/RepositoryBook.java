@@ -2,9 +2,9 @@ package com.example.main.dao;
 
 import com.example.main.entity.Author;
 import com.example.main.entity.Book;
-import com.example.main.entity.enam.EvaluationOfBook;
-import com.example.main.entity.enam.Genre;
-import com.example.main.entity.enam.ReadingStatus;
+import com.example.main.entity.enums.EvaluationOfBook;
+import com.example.main.entity.enums.Genre;
+import com.example.main.entity.enums.ReadingStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

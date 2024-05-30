@@ -1,9 +1,9 @@
 package com.example.main.dto;
 
 
-import com.example.main.entity.enam.EvaluationOfBook;
-import com.example.main.entity.enam.Genre;
-import com.example.main.entity.enam.ReadingStatus;
+import com.example.main.entity.enums.EvaluationOfBook;
+import com.example.main.entity.enums.Genre;
+import com.example.main.entity.enums.ReadingStatus;
 
 /**
  * DTO класс содержащий общие поля для создания экземпляров классов Author и Book
@@ -19,6 +19,7 @@ public class DtoAuthorsWithBooks {
     private String authorName;
     private String authorLastName;
     private String authorPatronymic;
+
 
     public String getTitleOfBook() {
         return titleOfBook;
@@ -90,5 +91,28 @@ public class DtoAuthorsWithBooks {
 
     public void setAuthorPatronymic(String authorPatronymic) {
         this.authorPatronymic = authorPatronymic;
+    }
+
+    public DtoAuthorsWithBooks(String titleOfBook
+            , Genre genre
+            , int quantityOfPage
+            , ReadingStatus readingStatus
+            , EvaluationOfBook evaluationOfBook
+            , String commentOfBook
+            , String authorName
+            , String authorLastName
+            , String authorPatronymic) {
+        this.titleOfBook = titleOfBook;
+        this.genre = genre;
+        this.quantityOfPage = quantityOfPage;
+        this.readingStatus = readingStatus;
+        this.evaluationOfBook = evaluationOfBook;
+        this.commentOfBook = commentOfBook;
+        this.authorName = authorName;
+        this.authorLastName = authorLastName;
+        this.authorPatronymic = authorPatronymic;
+    }
+
+    public DtoAuthorsWithBooks() {
     }
 }
