@@ -1,5 +1,23 @@
 package com.example.main.entity.enums;
 
 public enum Genre {
-    FANTASY, PSYCHOLOGY, HISTORY, PHILOSOPHY, DETECTIVE, HORROR,MOTIVATIONAL_LITERATURE,FINANCE,UNKNOWN;
+    FANTASY("Фентези"),
+    PSYCHOLOGY("Психология"),
+    HISTORY("История"),
+    PHILOSOPHY("Философия"),
+    DETECTIVE("Детектив"),
+    HORROR("Хоррор"),
+    MOTIVATIONAL_LITERATURE("Мотивационная литература"),
+    FINANCE("Финансы"),
+    UNKNOWN("-");
+
+    private final String genre;
+
+    Genre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
 }

@@ -10,11 +10,14 @@ import com.example.main.service.ServiceAuthor;
 import com.example.main.service.ServiceBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -47,6 +50,8 @@ public class ControllerAuthorsWithBooksMethods {
      */
     //todo переписать извлечение автора из коллекции с помощью Stream.
     @PostMapping("/add")
+    // TODO е работает без transactional если вызывать из фронта
+     @Transactional
     public ResponseEntity<GeneralResponse<?>> saveBookAndAuthor(@RequestBody DtoAuthorsWithBooks bookAuthorAndBookDTO) {
 
         try {

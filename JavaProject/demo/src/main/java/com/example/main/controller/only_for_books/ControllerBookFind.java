@@ -1,5 +1,6 @@
 package com.example.main.controller.only_for_books;
 
+import com.example.main.entity.Author;
 import com.example.main.entity.utilities.GeneralResponse;
 import com.example.main.entity.Book;
 import com.example.main.entity.enums.EvaluationOfBook;
@@ -9,7 +10,10 @@ import com.example.main.service.ServiceBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /** Класс является контроллером содержащим методы для поиска книг */
 @RestController

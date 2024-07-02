@@ -5,9 +5,9 @@ import com.example.main.entity.BookFile;
 import com.example.main.service.ServiceBookFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -21,6 +21,11 @@ public class ServiceBookFileImpl implements ServiceBookFile {
     @Override
     public List<BookFile> getAllBookFiles() {
         return repositoryBookFile.findAll();
+    }
+
+    @Override
+    public List<BookFile> getBookFileById(Integer bookId) {
+        return repositoryBookFile.findByBook_Id(bookId);
     }
 
 
@@ -37,6 +42,13 @@ public class ServiceBookFileImpl implements ServiceBookFile {
     @Override
     public void deletedBookFile(int id) {
         repositoryBookFile.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deletedBookFileForce(int id) {
+        System.out.println("deleeting id  " + id);
+        repositoryBookFile.deleteByIdForce(id);
     }
 
 

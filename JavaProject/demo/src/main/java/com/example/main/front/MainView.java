@@ -1,45 +1,23 @@
 package com.example.main.front;
 
-import com.example.main.controller.only_for_books.ControllerBookFind;
-import com.example.main.entity.Book;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vaadin.flow.router.RouteAlias;
 
-import java.util.ArrayList;
-
-@Route("/testtt")
+@Route("library")
+@RouteAlias("/")
 public class MainView extends VerticalLayout {
 
-    private final ControllerBookFind restControllerBook;
-    private final Grid<Book> grid = new Grid<>(Book.class);
 
-    @Autowired
-    public MainView(ControllerBookFind restControllerBook) {
-        this.restControllerBook = restControllerBook;
+    public MainView() {
+        Button button = new Button(TextConstants.ADD_NEW_BOOK, __ -> UI.getCurrent().navigate(AddBookVIew.class));
+        Button button1 = new Button(TextConstants.AUTHORS, __ -> UI.getCurrent().navigate(AuthorView.class));
+        Button button2 = new Button(TextConstants.BOOKS, __ -> UI.getCurrent().navigate(BookView.class));
 
-        Button showAllButton = new Button("Показать все книги");
-        showAllButton.addClickListener(event -> {
-            grid.setItems((DataProvider<Book, Void>) restControllerBook.showAllBooks());
-        });
-        ComboBox<Integer> evaluationOfBookComboBox = new ComboBox<>();
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        arrayList.add(1);
-        arrayList.add(2);
-        evaluationOfBookComboBox.setItems(arrayList);
-/*        evaluationOfBookComboBox.setItemLabelGenerator(selectedEvaluation -> {
-            if (EvaluationOfBook.EIGHT == selectedEvaluation) {
-                return "8 восемь!";
-            }
-            return "poshel na hui";
-        });*/
-      //  EvaluationOfBook value = evaluationOfBookComboBox.getValue();
-        add(new H1("Список книг"), evaluationOfBookComboBox, showAllButton, grid);
+        add(button, button1, button2);
+        setAlignItems(Alignment.CENTER);
     }
 
 

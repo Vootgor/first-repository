@@ -6,21 +6,25 @@ import com.example.main.entity.enums.Genre;
 import com.example.main.entity.enums.ReadingStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
-/** Entity class*/
+/**
+ * Entity class
+ */
 @Entity
 @Table(name = "books")
 public final class Book extends Literature {
 
-//    говорит о том что связь уже налажена классе Author поле books
+    //    говорит о том что связь уже налажена классе Author поле books
     @JsonIgnoreProperties(value = "books")
     @ManyToMany(mappedBy = "books", cascade = {CascadeType.PERSIST
-            ,CascadeType.MERGE, CascadeType.REFRESH , CascadeType.DETACH})
+            , CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     private Set<Author> authors;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    //todo поменял на EAGER, иначе не ищет
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<BookFile> bookFiles; //связь с табл
 
     public Book() {

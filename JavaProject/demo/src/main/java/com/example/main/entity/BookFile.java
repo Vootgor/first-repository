@@ -28,8 +28,9 @@ public final class BookFile {
     private byte [] fileData;
 
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.PERSIST
-            ,CascadeType.MERGE, CascadeType.REFRESH , CascadeType.DETACH})
+    //TODO удалил CascadeType.PERSIST
+    @ManyToOne(cascade = {
+            CascadeType.MERGE, CascadeType.REFRESH , CascadeType.DETACH})
     @JoinColumn(name = "book_id") // Связь с полем в таблице book_files
     private Book book;
 
