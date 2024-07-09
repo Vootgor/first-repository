@@ -10,11 +10,4 @@ public class LibraryApplication {
 		SpringApplication.run(LibraryApplication.class, args);
 	}
 
-//todo убрать лишний мейн
-
-/*	public static void main(String[] args) {
-		ArrayList<Author> authors = new ArrayList<>();
-	}*/
-
-
 }

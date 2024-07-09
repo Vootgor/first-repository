@@ -30,6 +30,7 @@ public class ControllerAuthorDeleted {
             return ResponseEntity.status(404).body(new GeneralResponse<>("Данный автор отсутствует в базе"));
         }
         serviceAuthor.deleteAuthor(id);
+        System.out.println("Удалили автора" + author);
         return ResponseEntity.status(204).body(new GeneralResponse<>("Был удален автор ", author));
     }
 

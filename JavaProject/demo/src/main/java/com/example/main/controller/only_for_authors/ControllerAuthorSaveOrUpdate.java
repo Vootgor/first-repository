@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * Класс является контроллером содержащим методы для сохранения и изменения авторов
  */
 @RestController
-@RequestMapping("/library/author/saveOrUpdate")
+@RequestMapping("/library/authors/saveOrUpdate")
 public class ControllerAuthorSaveOrUpdate {
 
     @Autowired

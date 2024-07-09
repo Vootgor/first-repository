@@ -41,7 +41,8 @@ public final class CheckingAddBook {
             throw new IllegalArgumentException("Название книги не может быть null или пустым");
         }else {
             titleOfBook = titleOfBook.trim();
-            ElevateFirstLetter.raiseFirstLetter(titleOfBook);
+            //здесь добавил прямое сохранение в  titleOfBook было без него
+            titleOfBook = ElevateFirstLetter.raiseFirstLetter(titleOfBook);
             if (SymbolsAndWhitespace.removalSymbolsAndWhitespace(titleOfBook).isEmpty()){
                 throw new IllegalArgumentException("Название книги состоит только из пробелов или символов. " +
                         "Давай переписывай");
