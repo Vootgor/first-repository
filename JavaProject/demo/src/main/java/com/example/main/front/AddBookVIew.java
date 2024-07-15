@@ -67,7 +67,7 @@ public class AddBookVIew extends VerticalLayout {
 
         HorizontalLayout mainLayout = new HorizontalLayout(authorSide, bookSide);
         Span labelTop = new Span(ADD_NEW_BOOK);
-        HorizontalLayout horizontalLayout = new HorizontalLayout(labelTop, VaadinUtil.toMenu);
+        HorizontalLayout horizontalLayout = new HorizontalLayout(labelTop, VaadinUtil.getMenuButton());
         horizontalLayout.setAlignItems(Alignment.CENTER);
         add(horizontalLayout, mainLayout, submitButton);
         setAlignSelf(Alignment.END, submitButton);

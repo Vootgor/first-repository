@@ -27,8 +27,7 @@ public final class CheckingAddAuthor {
      * проверенны и отформатированны.
      */
 
-    //todo SymbolsAndWhitespace NullAndEmpty ElevateFirstLetter лучше поместить в один класс StringsUtils, слишком много
-    // разнообразных классов, которые работают со строками
+
     //todo на этот метод можно написать unit тест в качестве практики
     //todo поправить описание метода
     public static Author checkingTransmittedArgumentsForAuthor(Author author) {

@@ -61,7 +61,7 @@ public class CheckingAddBookTest {
     }
 
     @Test
-    void testCheckingTransmittedArgumentsForBook_TitleWithMixedCase() {
+    void testCheckingTransmittedArgumentsForBook_TitleLetterCase() {
         book.setTitleOfBook("bOoK");
 
         Book result = CheckingAddBook.checkingTransmittedArgumentsForBook(book);

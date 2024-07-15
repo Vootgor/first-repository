@@ -47,7 +47,7 @@ public class AuthorView extends VerticalLayout {
         Span labelTop = new Span("Авторы");
         HorizontalLayout horizontalLayout = new HorizontalLayout(searchField, addAuthor, deleteAuthor, updateAuthor);
         horizontalLayout.setAlignItems(Alignment.CENTER);
-        HorizontalLayout horizontalLayout1 = new HorizontalLayout(labelTop, VaadinUtil.toMenu);
+        HorizontalLayout horizontalLayout1 = new HorizontalLayout(labelTop, VaadinUtil.getMenuButton());
         horizontalLayout1.setAlignItems(Alignment.CENTER);
         add(horizontalLayout1, horizontalLayout, grid);
 

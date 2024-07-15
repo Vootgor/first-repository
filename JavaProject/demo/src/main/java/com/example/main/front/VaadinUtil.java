@@ -17,7 +17,9 @@ import java.util.Map;
 
 public class VaadinUtil {
 
-    public static final Button toMenu = new Button("В меню", __ -> UI.getCurrent().navigate(MainView.class));
+    public static Button getMenuButton() {
+        return new Button("В меню", __ -> UI.getCurrent().navigate(MainView.class));
+    }
 
     public static void showTopDefaultNotification(String text, NotificationVariant type) {
         Notification notification = new Notification(text, 3000, Notification.Position.TOP_CENTER);

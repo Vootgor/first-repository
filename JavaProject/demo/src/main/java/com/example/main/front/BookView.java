@@ -70,7 +70,7 @@ public class BookView extends VerticalLayout {
         Span labelTop = new Span("Книги");
         HorizontalLayout horizontalLayout = new HorizontalLayout(searchField, searchGenre, searchReadingStatus, updateBookButton, manageFileButton, deleteBookButton);
         horizontalLayout.setAlignItems(Alignment.CENTER);
-        HorizontalLayout horizontalLayout1 = new HorizontalLayout(labelTop, VaadinUtil.toMenu);
+        HorizontalLayout horizontalLayout1 = new HorizontalLayout(labelTop, VaadinUtil.getMenuButton());
         horizontalLayout1.setAlignItems(Alignment.CENTER);
         add(horizontalLayout1, horizontalLayout, grid);
 

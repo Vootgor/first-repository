@@ -8,12 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CheckingAddAuthorTest {
 
+
     private Author author;
 
     @BeforeEach
     void setUp() {
-        author = new Author();
+        author = new Author("name","lastName","patronymic");
     }
+
 
     @Test
     void checkingTransmittedArgumentsForAuthor_NameIsNull() {
@@ -52,7 +54,37 @@ public class CheckingAddAuthorTest {
     void checkingTransmittedArgumentsForAuthor_NameHasOnlySymbols(){
         author.setAuthorName("!!@#$%^^$#");
 
-        IllegalArgumentException exception = assertThrows()
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->{
+            CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author);
+        });
+        assertEquals("Братюнь имя автора не может быть пустым или состоять " +
+                "только из символов и пробелов. Сделай нормально", exception.getMessage());
+    }
+
+    @Test
+    void checkingTransmittedArgumentsForAuthor_LastNameIsNull() {
+        author.setAuthorName("Jon");
+        author.setAuthorLastName(null);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author);
+        });
+        assertEquals("Братюнь фамилия автора не может быть пустой или null. Сделай нормально"
+                , exception.getMessage());
+    }
+
+
+    @Test
+    void checkingTransmittedArgumentsForAuthor_NameLetterCase(){
+        author.setAuthorName("iVan");
+        author.setAuthorLastName("ivANOV");
+        author.setAuthorPatronymic("iVAnovich");
+
+        Author result = CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author);
+
+        assertEquals("Ivan",result.getAuthorName());
+        assertEquals("Ivanov",result.getAuthorLastName());
+        assertEquals("Ivanovich",result.getAuthorPatronymic());
     }
 
 
