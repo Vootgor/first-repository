@@ -28,7 +28,6 @@ public final class CheckingAddAuthor {
      */
 
 
-    //todo на этот метод можно написать unit тест в качестве практики
     //todo поправить описание метода
     public static Author checkingTransmittedArgumentsForAuthor(Author author) {
 

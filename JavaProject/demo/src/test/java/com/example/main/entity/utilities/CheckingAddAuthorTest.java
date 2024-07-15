@@ -1,86 +1,65 @@
 package com.example.main.entity.utilities;
 
 import com.example.main.entity.Author;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.Assert.expectThrows;
 
 public class CheckingAddAuthorTest {
 
+static int count = 0;
 
-    private Author author;
+    @DataProvider(name = "authorData")
+    public Object[][] createAuthorData() {
+        return new Object[][]{
+                {null, "lastName", "patronymic", "Братюнь имя автора не может быть пустым или null. Сделай нормально"},
+                {"", "lastName", "patronymic", "Братюнь имя автора не может быть пустым или null. Сделай нормально"},
+                {"    ", "lastName", "patronymic", "Братюнь имя автора не может быть пустым или состоять " +
+                        "только из символов и пробелов. Сделай нормально"},
+                {"!@#$#%^#", "lastName", "patronymic", "Братюнь имя автора не может быть пустым или состоять " +
+                        "только из символов и пробелов. Сделай нормально"},
 
-    @BeforeEach
-    void setUp() {
-        author = new Author("name","lastName","patronymic");
+                {"name", null, "patronymic", "Братюнь фамилия автора не может быть пустой или null. Сделай нормально"},
+                {"name", "", "patronymic", "Братюнь фамилия автора не может быть пустой или null. Сделай нормально"},
+                {"name", "     ", "patronymic", "Братюнь фамилия автора не может быть пустой или состоять " +
+                        "только из символов и пробелов. Сделай нормально"},
+                {"name", "@!*@*$&@#", "patronymic", "Братюнь фамилия автора не может быть пустой или состоять " +
+                        "только из символов и пробелов. Сделай нормально"},
+
+                {"name", "lastName", "   ", "Братюнь отчество автора не может состоять " +
+                        "только из символов и пробелов. Сделай нормально"},
+                {"name", "lastName", "@@$$#%^$#", "Братюнь отчество автора не может состоять " +
+                        "только из символов и пробелов. Сделай нормально"}
+        };
     }
 
+    @Test(dataProvider = "authorData")
+    public void checkingTransmittedArgumentsForAuthor(String name, String lastName, String patronymic
+            , String expectedMassage) {
+        count++;
+        System.out.printf("Тест №%d начал работу", count);
+        Author author = new Author();
+        author.setAuthorName(name);
+        author.setAuthorLastName(lastName);
+        author.setAuthorPatronymic(patronymic);
 
-    @Test
-    void checkingTransmittedArgumentsForAuthor_NameIsNull() {
-        author.setAuthorName(null);
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author);
-        });
-        assertEquals("Братюнь имя автора не может быть пустым или null. Сделай нормально"
-                , exception.getMessage());
-    }
-
-    @Test
-    void checkingTransmittedArgumentsForAuthor_NameIsEmpty() {
-        author.setAuthorName("");
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author);
-        });
-        assertEquals("Братюнь имя автора не может быть пустым или null. Сделай нормально"
-                , exception.getMessage());
-    }
-
-    @Test
-    void checkingTransmittedArgumentsForAuthor_NameHasOnlyWhiteSpase(){
-        author.setAuthorName("    ");
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->{
-            CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author);
-                });
-        assertEquals("Братюнь имя автора не может быть пустым или состоять " +
-                "только из символов и пробелов. Сделай нормально", exception.getMessage());
-    }
-
-    @Test
-    void checkingTransmittedArgumentsForAuthor_NameHasOnlySymbols(){
-        author.setAuthorName("!!@#$%^^$#");
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->{
-            CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author);
-        });
-        assertEquals("Братюнь имя автора не может быть пустым или состоять " +
-                "только из символов и пробелов. Сделай нормально", exception.getMessage());
-    }
-
-    @Test
-    void checkingTransmittedArgumentsForAuthor_LastNameIsNull() {
-        author.setAuthorName("Jon");
-        author.setAuthorLastName(null);
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author);
-        });
-        assertEquals("Братюнь фамилия автора не может быть пустой или null. Сделай нормально"
-                , exception.getMessage());
+        IllegalArgumentException exception = expectThrows(IllegalArgumentException.class, () ->
+                CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author));
+        assertEquals(expectedMassage, exception.getMessage());
     }
 
 
     @Test
     void checkingTransmittedArgumentsForAuthor_NameLetterCase(){
-        author.setAuthorName("iVan");
-        author.setAuthorLastName("ivANOV");
-        author.setAuthorPatronymic("iVAnovich");
+        System.out.println("И вот еще тест checkingTransmittedArgumentsForAuthor_NameLetterCase");
+        Author author1 = new Author();
+        author1.setAuthorName("iVan");
+        author1.setAuthorLastName("ivANOV");
+        author1.setAuthorPatronymic("iVAnovich");
 
-        Author result = CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author);
+        Author result = CheckingAddAuthor.checkingTransmittedArgumentsForAuthor(author1);
 
         assertEquals("Ivan",result.getAuthorName());
         assertEquals("Ivanov",result.getAuthorLastName());
