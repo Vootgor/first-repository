@@ -23,7 +23,7 @@ public final class Book extends Literature {
             , CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     private Set<Author> authors;
 
-    //todo поменял на EAGER, иначе не ищет
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<BookFile> bookFiles; //связь с табл
 

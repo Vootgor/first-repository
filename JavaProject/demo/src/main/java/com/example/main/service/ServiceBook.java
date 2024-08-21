@@ -12,10 +12,10 @@ public interface ServiceBook {
 
 //---------------------------------------------------------
 // Standard CRUD method
-    public List<Book> getAllBooks();
-    public Book getBook(int id);
-    public void saveOrUpdateBook (Book book);
-    public void deleteBook(int id);
+     List<Book> getAllBooks();
+     Book getBook(int id);
+     void saveOrUpdateBook (Book book);
+     void deleteBook(int id);
 
 
 //----------------------------------------------------------------------------
@@ -23,22 +23,22 @@ public interface ServiceBook {
 
 
 //удаление всех книг
-    public void deleteAllBooks();
+     void deleteAllBooks();
 
 //ищем по названию книги
-    public List<Book> findByTitleOfBook(String titleOfBook);
+     List<Book> findByTitleOfBook(String titleOfBook);
 
 //поиск по жанру
-    public List<Book> findByGenre(Genre genre);
+     List<Book> findByGenre(Genre genre);
 
 //поиск по статусу чтения
-    public List<Book> findByReadingStatus(ReadingStatus readingStatus);
+     List<Book> findByReadingStatus(ReadingStatus readingStatus);
 
 //поиск по оценке
-    public List<Book> findByEvaluationOfBook(EvaluationOfBook evaluationOfBook);
+     List<Book> findByEvaluationOfBook(EvaluationOfBook evaluationOfBook);
 
 //проверка существования книги по названию
-    public boolean existsByTitleOfBookAndAuthors(String titleOfBook, Author author);
+     boolean existsByTitleOfBookAndAuthors(String titleOfBook, Author author);
 
     boolean existById(int id);
 

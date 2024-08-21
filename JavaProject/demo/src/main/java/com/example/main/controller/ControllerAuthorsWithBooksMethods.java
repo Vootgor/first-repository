@@ -48,10 +48,9 @@ public class ControllerAuthorsWithBooksMethods {
      *                             Author и Book.
      * @return возвращает 201 с сообщением о том какие автор и книга были добавлены.
      */
-    //todo переписать извлечение автора из коллекции с помощью Stream.
     @PostMapping("/add")
-    // TODO е работает без transactional если вызывать из фронта
-     @Transactional
+    // @Transactional для того чтоб метод выполнялся в рамках одной транзакции
+    @Transactional
     public ResponseEntity<GeneralResponse<?>> saveBookAndAuthor(@RequestBody DtoAuthorsWithBooks bookAuthorAndBookDTO) {
 
         try {

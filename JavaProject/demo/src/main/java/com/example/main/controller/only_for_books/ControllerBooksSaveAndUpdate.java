@@ -1,12 +1,18 @@
 package com.example.main.controller.only_for_books;
 
 import com.example.main.entity.Book;
+import com.example.main.entity.enums.ReadingStatus;
 import com.example.main.entity.utilities.CheckingAddBook;
 import com.example.main.entity.utilities.GeneralResponse;
 import com.example.main.service.ServiceBook;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /** Класс является контроллером содержащим методы для добавления и изменения книг */
 @RestController
@@ -40,14 +46,21 @@ public class ControllerBooksSaveAndUpdate {
      * @return воздвращает измененную книгу
      */
 //todo сделать логику при изменении статуса на прочитано проставлялась текущая дата в поле book_was_read_date
+
     @PutMapping("/updateBook")
     public ResponseEntity<GeneralResponse<Book>> updateBook(@RequestBody Book book) {
         try {
-            System.out.println("Получен id книги = " + book.getId());
             if (book.getId() == 0){
                 return ResponseEntity.status(400).body(new GeneralResponse<>("Не указан id книги"));
             } else if (!serviceBook.existById(book.getId())) {
                 return ResponseEntity.status(404).body(new GeneralResponse<>("Книга с данным id не найдена"));
+            }
+
+            LocalDateTime bookWasReadDate = book.getBookWasReadDate();
+            ReadingStatus readingStatus = book.getReadingStatus();
+            System.out.println(bookWasReadDate);
+            if (readingStatus == ReadingStatus.WAS_READ && bookWasReadDate == null){
+                book.setBookWasReadDate(LocalDateTime.now());
             }
 
             CheckingAddBook.checkingTransmittedArgumentsForBook(book);

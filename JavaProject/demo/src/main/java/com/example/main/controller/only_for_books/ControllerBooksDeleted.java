@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 /** Класс является контроллером содержащим методы для удаления книг */
 @RestController
 @RequestMapping("/library/books/delete")
-//todo все тоже самое что я писал в ControllerAuthorsWithBooksMethods
 public class ControllerBooksDeleted {
 
     @Autowired

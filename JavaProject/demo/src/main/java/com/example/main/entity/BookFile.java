@@ -28,7 +28,6 @@ public final class BookFile {
     private byte [] fileData;
 
     @JsonIgnore
-    //TODO удалил CascadeType.PERSIST
     @ManyToOne(cascade = {
             CascadeType.MERGE, CascadeType.REFRESH , CascadeType.DETACH})
     @JoinColumn(name = "book_id") // Связь с полем в таблице book_files
@@ -93,8 +92,7 @@ public final class BookFile {
         this.book = book;
     }
 
-    //todo ", fileData=" + Arrays.toString(fileData)
-    // эту строку лучше убрать, т.к она сломает вывод из-за огромного кол-ва байтов
+
     @Override
     public String toString() {
         return "BookFile{" +
