@@ -60,6 +60,7 @@ public class CheckingAddBookTest {
                 "Давай переписывай", exception.getMessage());
     }
 
+
     @Test
     void testCheckingTransmittedArgumentsForBook_TitleLetterCase() {
         book.setTitleOfBook("bOoK");
