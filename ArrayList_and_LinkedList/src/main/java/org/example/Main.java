@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,7 +8,6 @@ public class Main {
 /*        // проверка MyArrayList
         MyArrayList<String> arrayList = new MyArrayList<>();
         MyArrayList sublist = new MyArrayList<>();
-
         System.out.println("Заполняем 6 ячеек списка");
         arrayList.add("Один");
         arrayList.add("Два");
@@ -19,7 +15,6 @@ public class Main {
         arrayList.add("Четыре");
         arrayList.add("Пять");
         arrayList.add("Шесть");
-
         System.out.println("Вместимость списка = " + arrayList.length());
         System.out.println("Заполненность списка = " + arrayList.size());
         System.out.println("Добавляем еще 5 значений в список");
